@@ -58,7 +58,8 @@ mydf_all %>% filter(Method %in% show_methods,snr==10) %>%
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
   facet_grid(p~act_setting, scales = "free_y") +
   coord_cartesian(ylim=c(0,1.35))+
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  geom_hline(yintercept=1,linetype=2)
 # ggsave(paste0("../plots/SPAR_rMSPE_synthRateye.pdf"), height = 6, width = 8)
 
 # pAUC
@@ -68,17 +69,18 @@ mydf_all %>% filter(Method %in% show_methods,snr==10) %>%
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
   ggh4x::facet_grid2(p~act_setting, scales = "free_y",independent = "y") +
   theme(legend.position = "none")
-# ggsave(paste0("../plots/SPAR_pAUC_synthRateye.pdf"), height = 6, width = 8)
+# ggsave(paste0("../plots/SPAR_pAUC_synthRateye.pdf"), height = 6, width = 10)
 
 # table of ranks for pAUC and rMSPE
 
-n_showm <- length(show_methods)
-mydf_all_rank_rMSPE_pAUC <- mydf_all %>% filter(Method %in% show_methods,snr==10) %>% group_by(rep,setting) %>% mutate(rank_pAUC=n_showm + 1 - rank(pAUC) ,rank_rMSPE=rank(rMSPE))
+# remove PLS because NA for p=22905
+n_showm <- length(show_methods)-1
+mydf_all_rank_rMSPE_pAUC <- mydf_all %>% filter(Method %in% show_methods,Method!="PLS",snr==10) %>% group_by(rep,setting) %>% mutate(rank_pAUC=n_showm + 1 - rank(pAUC) ,rank_rMSPE=rank(rMSPE))
 rank_tab_rMSPE_pAUC <- mydf_all_rank_rMSPE_pAUC %>% group_by(Method) %>% summarise(mean_rank_rMSPE = mean(rank_rMSPE), se_rank_rMSPE = sd(rank_rMSPE)/sqrt(100*3*6),
                                                                                    mean_rank_pAUC = mean(rank_pAUC), se_rank_pAUC = sd(rank_pAUC)/sqrt(100*3*6)) 
 rank_tab_rMSPE_pAUC
 
-rank_tab <- matrix(NA,9,3)
+rank_tab <- matrix(NA,n_showm,3)
 colnames(rank_tab) <- c("Method","rMSPE","pAUC")
 
 rank_tab[,1] <- as.character(rank_tab_rMSPE_pAUC[,1]$Method)
@@ -100,5 +102,5 @@ mydf_all %>% filter(Method %in% show_methods,act_setting=="medium",p==2000,snr<2
   labs(y=" ")+
   scale_linetype(guide="none")+
   theme(legend.position = "none")
-# ggsave(paste0("../plots/SPAR_synthRateye_medium_incSNR.pdf"), height = 6, width = 12)
+# ggsave(paste0("../plots/SPAR_synthRateye_medium_incSNR.pdf"), height = 5, width = 10)
 

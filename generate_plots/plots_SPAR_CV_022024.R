@@ -60,7 +60,8 @@ mydf_all %>% filter(Method %in% show_methods,p==2000,n==200,snr==10) %>%
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
   facet_grid(cov_setting~act_setting, scales = "free_y") +
   coord_cartesian(ylim=c(0,1.35))+
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  geom_hline(aes(yintercept=1),linetype=2)
 # ggsave(paste0("../plots/SPAR_CV_rMSPE_cov_settings.pdf"), height = 10, width = 8)
 
 
@@ -71,7 +72,7 @@ mydf_all %>% filter(Method %in% show_methods,p==2000,n==200,snr==10) %>%
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
   ggh4x::facet_grid2(cov_setting~act_setting, scales = "free_y",independent = "y") +
   theme(legend.position = "none")
-# ggsave(paste0("../plots/SPAR_CV_pAUC_cov_settings.pdf"), height = 10, width = 8)
+# ggsave(paste0("../plots/SPAR_CV_pAUC_cov_settings.pdf"), height = 10, width = 10)
 
 # AUC
 mydf_all %>% filter(Method %in% show_methods,p==2000,n==200,snr==10) %>%
@@ -83,7 +84,7 @@ mydf_all %>% filter(Method %in% show_methods,p==2000,n==200,snr==10) %>%
 # ggsave(paste0("../plots/SPAR_CV_AUC_cov_settings.pdf"), height = 10, width = 8)
 
 # Prec
-mydf_all %>% filter(Method %in% sparse_methods,p==2000,n==200,snr==10) %>%
+mydf_all %>% filter(Method %in% c(sparse_methods,"TARP"),p==2000,n==200,snr==10) %>%
   ggplot(aes(x=Method,y=Precision,fill=Method,linetype=isSparse)) +
   geom_boxplot() +
   geom_hline(aes(yintercept=a/p),linetype=2) +
@@ -93,7 +94,7 @@ mydf_all %>% filter(Method %in% sparse_methods,p==2000,n==200,snr==10) %>%
 # ggsave(paste0("../plots/SPAR_CV_Precision_cov_settings.pdf"), height = 10, width = 8)
 
 # Rec
-mydf_all %>% filter(Method %in% sparse_methods,p==2000,n==200,snr==10) %>%
+mydf_all %>% filter(Method %in% c(sparse_methods,"TARP"),p==2000,n==200,snr==10) %>%
   ggplot(aes(x=Method,y=Recall,fill=Method,linetype=isSparse)) +
   geom_boxplot() +
   geom_hline(yintercept=1,linetype=2) +
@@ -119,19 +120,22 @@ rank_tab_Prec_Rec <- mydf_all_rank_Prec_Rec %>% group_by(Method) %>% summarise(m
 rank_tab_Prec_Rec
 # kable(rank_tab_Prec_Rec,digits=3,format="latex",booktabs=TRUE)
 
-rank_tab <- matrix(NA,9,5)
-colnames(rank_tab) <- c("Method","rMSPE","pAUC","Precision","Recall")
+# rank_tab <- matrix(NA,9,5)
+# colnames(rank_tab) <- c("Method","rMSPE","pAUC","Precision","Recall")
+
+rank_tab <- matrix(NA,9,3)
+colnames(rank_tab) <- c("Method","rMSPE","pAUC")
 
 rank_tab[,1] <- as.character(rank_tab_rMSPE_pAUC[,1]$Method)
 rank_tab[,2] <- apply(round(cbind(rank_tab_rMSPE_pAUC[,2],rank_tab_rMSPE_pAUC[,3]),3),1,function(row)paste0(row[1]," (",row[2],")"))
 rank_tab[,3] <- apply(round(cbind(rank_tab_rMSPE_pAUC[,4],rank_tab_rMSPE_pAUC[,5]),3),1,function(row)paste0(row[1]," (",row[2],")"))
-rank_tab[c(1,2,3,7,8),4] <- apply(round(cbind(rank_tab_Prec_Rec[,2],rank_tab_Prec_Rec[,3]),3),1,function(row)paste0(row[1]," (",row[2],")"))
-rank_tab[c(1,2,3,7,8),5] <- apply(round(cbind(rank_tab_Prec_Rec[,4],rank_tab_Prec_Rec[,5]),3),1,function(row)paste0(row[1]," (",row[2],")"))
+# rank_tab[c(1,2,3,7,8),4] <- apply(round(cbind(rank_tab_Prec_Rec[,2],rank_tab_Prec_Rec[,3]),3),1,function(row)paste0(row[1]," (",row[2],")"))
+# rank_tab[c(1,2,3,7,8),5] <- apply(round(cbind(rank_tab_Prec_Rec[,4],rank_tab_Prec_Rec[,5]),3),1,function(row)paste0(row[1]," (",row[2],")"))
 # copy console output to tex
 kable(rank_tab,format="latex",booktabs=TRUE)
 
 # plot group medium over p
-tmp_df <- mydf_all %>% filter(Method %in% show_methods,cov_setting=="group",act_setting=="medium",n==200,snr==10) 
+tmp_df <- mydf_all %>% filter(Method %in% show_methods,Method!="RP_CW",cov_setting=="group",act_setting=="medium",n==200,snr==10) 
 tmp_df$p <- factor(tmp_df$p,levels=c("10000","2000","500"))
 tmp_df %>%
   pivot_longer(c(rMSPE,pAUC),names_to = "Measure",values_to = "Value") %>% # mutate("Meas_Cat"=ifelse(Measure=="rMSPE","rMSPE","F1/Prec/Rec")) %>%
@@ -139,15 +143,15 @@ tmp_df %>%
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
   facet_grid(Measure~p, scales = "free_y")  +
-  # coord_cartesian(ylim=c(0,1.2)) +
   labs(y=" ") +
   scale_linetype(guide="none")+
-  theme(legend.position = "none")
-# ggsave(paste0("../plots/SPAR_CV_group_medium_decP.pdf"), height = 6, width = 12)
+  theme(legend.position = "none") +
+  geom_hline(data=data.frame(yintercept = 1,Measure="rMSPE"),aes(yintercept=yintercept),linetype=2)
+# ggsave(paste0("../plots/SPAR_CV_group_medium_decP.pdf"), height = 5, width = 10)
 
 # plot group medium over n 
 
-mydf_all %>% filter(Method %in% show_methods,cov_setting=="group",act_setting=="medium",p==2000,snr==10,n<500) %>%
+mydf_all %>% filter(Method %in% show_methods,Method!="RP_CW",cov_setting=="group",act_setting=="medium",p==2000,snr==10,n<500) %>%
   pivot_longer(c(rMSPE,pAUC),names_to = "Measure",values_to = "Value") %>% #mutate("Meas_Cat"=ifelse(Measure=="rMSPE","rMSPE","F1/Prec/Rec")) %>%
   ggplot(aes(x=Method,y=Value,fill=Method,linetype=isSparse)) +
   geom_boxplot() +
@@ -156,12 +160,13 @@ mydf_all %>% filter(Method %in% show_methods,cov_setting=="group",act_setting=="
   # coord_cartesian(ylim=c(0,1.2)) +
   labs(y=" ")+
   scale_linetype(guide="none")+
-  theme(legend.position = "none")
-# ggsave(paste0("../plots/SPAR_CV_group_medium_incN.pdf"), height = 6, width = 12)
+  theme(legend.position = "none") +
+  geom_hline(data=data.frame(yintercept = 1,Measure="rMSPE"),aes(yintercept=yintercept),linetype=2)
+# ggsave(paste0("../plots/SPAR_CV_group_medium_incN.pdf"), height = 5, width = 10)
 
 # plot group medium over snr 
 
-mydf_all %>% filter(Method %in% show_methods,cov_setting=="group",act_setting=="medium",p==2000,snr<20,n==200) %>%
+mydf_all %>% filter(Method %in% show_methods,Method!="RP_CW",cov_setting=="group",act_setting=="medium",p==2000,snr<20,n==200) %>%
   pivot_longer(c(rMSPE,pAUC),names_to = "Measure",values_to = "Value") %>% #mutate("Meas_Cat"=ifelse(Measure=="rMSPE","rMSPE","F1/Prec/Rec")) %>%
   ggplot(aes(x=Method,y=Value,fill=Method,linetype=isSparse)) +
   geom_boxplot() +
@@ -170,8 +175,9 @@ mydf_all %>% filter(Method %in% show_methods,cov_setting=="group",act_setting=="
   # coord_cartesian(ylim=c(0,1.2)) +
   labs(y=" ")+
   scale_linetype(guide="none") +
-  theme(legend.position = "none")
-# ggsave(paste0("../plots/SPAR_CV_group_medium_incSNR.pdf"), height = 6, width = 12)
+  theme(legend.position = "none") +
+  geom_hline(data=data.frame(yintercept = 1,Measure="rMSPE"),aes(yintercept=yintercept),linetype=2)
+# ggsave(paste0("../plots/SPAR_CV_group_medium_incSNR.pdf"), height = 5, width = 10)
 
 # plot Ctime
 myp <- c(500,2000,10^4)

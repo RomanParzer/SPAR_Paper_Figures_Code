@@ -61,12 +61,13 @@ mydf_all %>% filter(Method %in% c(show_methods,"Ridge"),dataset!="face",Method!=
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
   coord_cartesian(ylim=c(0,1.5)) +
-  scale_linetype(guide="none")
+  scale_linetype(guide="none") +
+  geom_hline(yintercept=1,linetype=2)
 # ggsave(paste0("../plots/SPAR_CV_rMSPE_rateye.pdf"), height = 4, width = 8)
 
 
 med_df_all <- mydf_all %>% group_by(Method,dataset) %>% summarize(MedrMSPE=median(rMSPE),MednumAct=median(numAct))
-kab_numAct_all <- as.matrix(pivot_wider(med_df_all[med_df_all$Method%in%c(show_methods,"Ridge"),-3],names_from = dataset,values_from = MednumAct))
+kab_numAct_all <- as.matrix(pivot_wider(med_df_all[med_df_all$Method%in%c(sparse_methods,"TARP"),-3],names_from = dataset,values_from = MednumAct))
 # row.names(kab_rMSPE) <- tab_rMSPE$method
 require(knitr)
 # copy to latex
