@@ -94,10 +94,6 @@ foreach(i=1:nrep) %dopar% {
                                                 })
       tmp_time <- as.numeric(Sys.time() - tstamp,units="secs")
       
-      plot(performance(prediction(as.numeric(abs(callres$beta)),as.numeric(data$beta!=0)),measure="tpr", x.measure="fpr"))
-      performance(prediction(as.numeric(abs(callres$beta)),as.numeric(data$beta!=0)),measure="auc")@y.values[[1]]
-      performance(prediction(as.numeric(abs(callres$beta)),as.numeric(data$beta!=0)),measure="auc",fpr.stop=n/(p-a))@y.values[[1]]/(n/(p-a))
-      
       if (is.null(callres$beta)) {
         parresi$res[,k] <- c(mean((callres$yhat-ytest)^2)/rMSPEconst, # rMSPE
                              mean((callres$yhat_tr-y)^2)/rMSPEconst_tr, # rMSPE_tr
