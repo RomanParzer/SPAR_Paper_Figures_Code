@@ -125,7 +125,6 @@ abs_coef[-const_col_ind] <- abs(face_coef$beta)
 
 coef <- numeric(4096)
 coef[-const_col_ind] <- face_coef$beta
-# coef <- log(abs(coef)+1)* sign(coef)
  
 plot1 <- ggplot(data.frame(X=rep(1:64,each=64),Y=rep(64:1,64),`pos.coefs`=ifelse(coef>0,coef,0)), aes(X, Y, fill= `pos.coefs`)) +
   geom_tile() +
@@ -149,7 +148,7 @@ plot3 <- ggplot(data.frame(X=rep(1:64,each=64),Y=rep(64:1,64),Z=facedata$images[
 plot3
 shap_vals <- numeric(4096)
 shap_vals[-const_col_ind] <- facedata$images[-const_col_ind,i]*face_coef$beta
-# shap_vals[whichmax] <- max(shap_vals[-whichmax])
+
 plot4 <- ggplot(data.frame(X=rep(1:64,each=64),Y=rep(64:1,64),effect=shap_vals), aes(X, Y, fill= effect)) +
   geom_tile() +
   theme_void() +
