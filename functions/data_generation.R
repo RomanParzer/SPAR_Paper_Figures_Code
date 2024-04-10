@@ -56,7 +56,7 @@ generate_data_linreg <- function(n,p,cov_setting=c("ind","comsym","ar1","group",
          ar1={ # explizit cholesky dec from Ben Bolker 09 Oct 2019 (https://bbolker.github.io/mixedmodels-misc/notes/varmats.html)
            R <- matrix(0,p,p)
            R[1,] <- rho^(0:(p-1))        ## formula for 1st row
-           cc <- sqrt(1 - 0.9^2);        ## scaling factor: c^2 + rho^2 = 1
+           cc <- sqrt(1 - rho^2);        ## scaling factor: c^2 + rho^2 = 1
            R2 <-  cc * R[1,]             ## formula for 2nd row */
            for (j in 2:p) {              ## shift elements in 2nd row for remaining rows
              R[j, j:p] <- R2[1:(p-j+1)] 
