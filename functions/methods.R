@@ -19,7 +19,7 @@
 # 14 RP wrapper
 
 # # install.packages("remotes")
-# remotes::install_github("RomanParzer/SPAR")
+# remotes::install_github("RomanParzer/SPAR@v1.1")
 
 pacman::p_load(pls, glmnet, SIS, MASS, SplitReg, robustHD, stringr,SPAR,Matrix)
 source("../TARP-master/TARP.R")
