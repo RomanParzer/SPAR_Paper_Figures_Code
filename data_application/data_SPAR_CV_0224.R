@@ -24,7 +24,8 @@ methods <- list("HOLP"=myOLS,
                 "TARP"=myTARP,
                 "SPAR"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=20,nlambda=1)},
                 "SPAR CV"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=c(10,20,30,50,100),opt_par = "best")},
-                "SPAR CV 1se"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=c(10,20,30,50,100),opt_par = "1se")})
+                "SPAR CV 1se"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=c(10,20,30,50,100),opt_par = "1se")},
+                "HOLPScr"=myHOLPScr)
 
 measures <- c("rMSPE","rMSPE_tr","Time","numAct")
 

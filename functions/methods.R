@@ -17,9 +17,11 @@
 # 12 RF?
 # 13 SPAR wrapper
 # 14 RP wrapper
+# 15 HOLP Screening Wrapper
 
 # # install.packages("remotes")
-# remotes::install_github("RomanParzer/SPAR@v1.1")
+# remotes::install_github("RomanParzer/SPAR@v1.1.1")
+
 
 pacman::p_load(pls, glmnet, SIS, MASS, SplitReg, robustHD, stringr,SPAR,Matrix)
 source("../TARP-master/TARP.R")
@@ -38,10 +40,13 @@ myOLS <- function(x,y,xtest) {
                                  return(solve(crossprod(z)+(sqrt(p)+sqrt(n))*diag(p),crossprod(z,yz)))
                                })
   } else {
-    solve_res <- tryCatch( solve(tcrossprod(z),yz),
-                           error=function(error_message) {
-                             return(solve(tcrossprod(z)+(sqrt(p)+sqrt(n))*diag(n),yz))
-                           })
+    eig <- eigen(tcrossprod(z),symmetric = TRUE)
+    if (sum(eig$values>1e-8) >= (n-1)) {
+      myinv <- tcrossprod(eig$vectors[,eig$values>1e-8]%*%diag(1/sqrt(eig$values[eig$values>1e-8])))
+      solve_res <- myinv%*%yz
+    } else {
+      solve_res <- solve(tcrossprod(z)+(sqrt(p)+sqrt(n))*diag(n),yz)
+    }
     betaz <- crossprod(z,solve_res)
   }
   
@@ -289,6 +294,39 @@ myRP <- function(x,y,xtest,RP=c("Gaussian","Sparse","CWSparse"),nummod=1) {
   yhat_tr <- intercept + x%*%beta
   
   return(list(yhat=yhat, yhat_tr=yhat_tr,beta=beta,intercept=intercept))
+}
+
+# # 15 HOLP Screen
+myHOLPScr <- function(x,y,xtest) {
+  p <- ncol(x)
+  n <- nrow(x)
+  z <- robustHD::standardize(x)
+  yz <- robustHD::standardize(y)
+  
+  if (p < n) {
+    use_ind <- 1:p 
+  } else {
+    eig <- eigen(tcrossprod(z),symmetric = TRUE)
+    if (sum(eig$values>1e-8) >= (n-1)) {
+      myinv <- tcrossprod(eig$vectors[,eig$values>1e-8]%*%diag(1/sqrt(eig$values[eig$values>1e-8])))
+      solve_res <- myinv%*%yz
+    } else {
+      solve_res <- solve(tcrossprod(z)+(sqrt(p)+sqrt(n))*diag(n),yz)
+    }
+    betaz <- crossprod(z,solve_res)
+    use_ind <- which(abs(betaz)>=sort(abs(betaz),decreasing = TRUE)[n])
+  }
+
+  elnet_cv <- cv.glmnet(x[,use_ind],y,alpha=1,folds=10) # standardize = TRUE by default
+  # refit with optimal lambda
+  elnet <- glmnet(x[,use_ind],y,alpha=1, lambda = elnet_cv$lambda.1se)
+  
+  yhat <- predict(elnet,s = elnet_cv$lambda.1se,newx = xtest[,use_ind])
+  yhat_tr <- predict(elnet,s = elnet_cv$lambda.1se,newx = x[,use_ind])
+  
+  mybeta <- numeric(p)
+  mybeta[use_ind] <- elnet$beta
+  return(list(yhat=yhat, yhat_tr=yhat_tr,lambda=elnet_cv$lambda.1se,beta=mybeta,intercept=elnet$a0))
 }
 
 

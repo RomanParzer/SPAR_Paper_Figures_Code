@@ -3,13 +3,13 @@
 
 pacman::p_load(dplyr, ggplot2, tidyr, ggrepel,knitr,kableExtra)
 
-resobj <- readRDS("../saved_results/synth_rateye_SPAR_nset12_reps100_nmeth16.rds")
+resobj <- readRDS("../saved_results/synth_rateye_SPAR_nset12_reps100_nmeth17.rds")
 res <- resobj$res
 
 methods <- dimnames(res)[[3]]
 settings <- attributes(res)$settings
 
-show_methods <- methods[c(3,6:8,11:15)]
+show_methods <- methods[c(1,3,6:8,11:15)]
 sparse_methods <- methods[c(6,7,8,14,15)]
 
 
@@ -46,8 +46,8 @@ for (k in 2:nrow(settings)) {
 mydf_all <- mutate(mydf_all,"F1"=ifelse(Precision==0&Recall==0,0,2*Precision*Recall/(Precision+Recall)))
 mydf_all$act_setting <- factor(mydf_all$act_setting,levels = c("sparse","medium","dense"))
 mydf_all$Method <- stringr::str_replace_all(mydf_all$Method,"\\."," ")
-mydf_all$Method <- factor(mydf_all$Method,levels = methods[c(1,2,4:16,3)])
-mydf_all <- mutate(mydf_all,"isSparse"=ifelse(Method%in%c("LASSO","AdLASSO","ElNet","SIS"),TRUE,FALSE))
+mydf_all$Method <- factor(mydf_all$Method,levels = methods[c(2,4:8,17,9:16,3,1)])
+mydf_all <- mutate(mydf_all,"isSparse"=ifelse(Method%in%c("LASSO","AdLASSO","ElNet","SIS","HOLPScr"),TRUE,FALSE))
 # rescale to (0,1)
 mydf_all <- mutate(mydf_all,"pAUC"=pAUC*2*(p-a)/120)
 

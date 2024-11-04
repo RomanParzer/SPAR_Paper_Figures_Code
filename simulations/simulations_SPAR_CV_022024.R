@@ -26,7 +26,8 @@ methods <- list("HOLP"=myOLS,
                 "TARP"=myTARP,
                 "SPAR"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=20,nlambda=1)},
                 "SPAR CV"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=c(10,20,30,50,100),opt_par = "best")},
-                "SPAR CV 1se"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=c(10,20,30,50,100),opt_par = "1se")})
+                "SPAR CV 1se"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=c(10,20,30,50,100),opt_par = "1se")},
+                "HOLPScr"=myHOLPScr)
 
 
 measures <- c("rMSPE","rMSPE_tr","Time","Precision","Recall","activeEE","passiveEE","numAct","AUC","pAUC")
@@ -49,7 +50,7 @@ simulation_settings <- simulation_settings %>% mutate(a = round(ifelse(act_setti
 ################## simulations ##############################################################################
 unlink("../saved_results/log.txt")
 # select number of cores eg detectCores()-1
-my.cluster <- parallel::makeCluster(4, type = "PSOCK", outfile = "../saved_results/log.txt")
+my.cluster <- parallel::makeCluster(7, type = "PSOCK", outfile = "../saved_results/log.txt")
 doParallel::registerDoParallel(cl = my.cluster)
 # foreach::getDoParRegistered()
 
@@ -63,11 +64,12 @@ fits <- vector(mode="list",length = nset)
 
 clusterExport(my.cluster,c('simulation_settings','nmeas','nmethods','methods'), envir = environment())
 clusterEvalQ(my.cluster, {  
+  pacman::p_load(ROCR)
   source("../functions/multi_assign.R")
   source("../functions/data_generation.R")
   source("../functions/methods.R")
 })
-
+# i <- j <- 1
 
 parres <- foreach(j = 1:nset) %:%
 foreach(i=1:nrep) %dopar% {
@@ -83,6 +85,7 @@ foreach(i=1:nrep) %dopar% {
     ytest <- data$ytest
     rMSPEconst <- mean((ytest-mean(y))^2)
     rMSPEconst_tr <- var(y)
+    # k <- 17
 
     for (k in 1:nmethods) {
       set.seed((1234+i)^2 + k)

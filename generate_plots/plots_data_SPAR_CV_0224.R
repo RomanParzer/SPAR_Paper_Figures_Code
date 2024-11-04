@@ -3,14 +3,13 @@
 
 pacman::p_load(dplyr, ggplot2, tidyr, ggrepel)
 
-resobj <- readRDS("../saved_results/data_SPAR_24_nset3_reps100_nmeth16.rds")
-
+resobj <- readRDS("../saved_results/data_SPAR_24_nset3_reps100_nmeth17.rds")
 res <- resobj$res
 methods <- dimnames(res)[[3]]
 dataset_sizes <- resobj$dataset_sizes
 dataset_sizes$p[3] <- 3890 # delete "constant" pixels with 0 variance, 64x64 = 4096
 
-show_methods <- methods[c(3,6:8,11:15)]
+show_methods <- methods[c(1,3,6:8,11:15)]
 sparse_methods <- methods[c(6,7,8,14,15)]
 
 
@@ -29,8 +28,8 @@ for (k in 2:nrow(dataset_sizes)) {
                                dataset_sizes[k,]))
 }
 
-mydf_all$Method <- factor(mydf_all$Method,levels = methods[c(1,2,5:16,3,4)])
-mydf_all <- mutate(mydf_all,"isSparse"=ifelse(Method%in%c("AdLASSO","ElNet","SIS"),TRUE,FALSE))
+mydf_all$Method <- factor(mydf_all$Method,levels = methods[c(2,5:8,17,9:16,3,4,1)])
+mydf_all <- mutate(mydf_all,"isSparse"=ifelse(Method%in%c("AdLASSO","ElNet","SIS","HOLPScr"),TRUE,FALSE))
 
 med_df <- mydf_all %>% group_by(Method,dataset) %>% summarize(MedrMSPE=median(rMSPE),MednumAct=median(numAct)) %>% filter(dataset=="face")
 med_df$MednumAct[9] <- 3890
@@ -153,7 +152,7 @@ plot4 <- ggplot(data.frame(X=rep(1:64,each=64),Y=rep(64:1,64),effect=shap_vals),
   geom_tile() +
   theme_void() +
   scale_fill_gradient2() +
-  ggtitle(bquote(hat(y) == .(round(predict(face_res,xnew=as.matrix(xtest),coef = face_coef)[1],1)))) +
+  ggtitle(bquote(hat(y) == .(round(predict(face_res,xnew=as.matrix(xtest),coef = face_coef)[which(i==c(9,12))],1)))) +
   theme(plot.title = element_text(hjust = 0.5)) 
 plot4
 require(gridExtra)

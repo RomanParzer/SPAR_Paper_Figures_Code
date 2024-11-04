@@ -1,0 +1,349 @@
+starting worker pid=27712 on localhost:11317 at 17:09:14.584
+starting worker pid=25960 on localhost:11317 at 17:09:14.597
+starting worker pid=27724 on localhost:11317 at 17:09:14.686
+starting worker pid=28272 on localhost:11317 at 17:09:14.769
+starting worker pid=13052 on localhost:11317 at 17:09:14.902
+starting worker pid=29492 on localhost:11317 at 17:09:15.000
+starting worker pid=25256 on localhost:11317 at 17:09:15.151
+starting worker pid=29084 on localhost:11317 at 17:09:15.153
+starting worker pid=22016 on localhost:11317 at 17:09:15.159
+starting worker pid=27528 on localhost:11317 at 17:09:15.237
+starting worker pid=20544 on localhost:11317 at 17:09:15.316
+starting worker pid=28924 on localhost:11317 at 17:09:15.344
+starting worker pid=29032 on localhost:11317 at 17:09:15.349
+starting worker pid=29836 on localhost:11317 at 17:09:15.380
+starting worker pid=28076 on localhost:11317 at 17:09:15.399
+starting worker pid=17856 on localhost:11317 at 17:09:15.418
+starting worker pid=29336 on localhost:11317 at 17:09:15.446
+starting worker pid=20628 on localhost:11317 at 17:09:15.465
+starting worker pid=25040 on localhost:11317 at 17:09:15.474
+starting worker pid=30108 on localhost:11317 at 17:09:15.485
+starting worker pid=12252 on localhost:11317 at 17:09:15.490
+starting worker pid=10180 on localhost:11317 at 17:09:15.522
+starting worker pid=29384 on localhost:11317 at 17:09:15.524
+starting worker pid=30292 on localhost:11317 at 17:09:15.524
+starting worker pid=28336 on localhost:11317 at 17:09:15.538
+starting worker pid=30272 on localhost:11317 at 17:09:15.545
+starting worker pid=21280 on localhost:11317 at 17:09:15.549
+starting worker pid=29948 on localhost:11317 at 17:09:15.560
+starting worker pid=28196 on localhost:11317 at 17:09:15.565
+starting worker pid=30508 on localhost:11317 at 17:09:15.577
+starting worker pid=28764 on localhost:11317 at 17:09:15.580
+starting worker pid=17636 on localhost:11317 at 17:09:15.585
+starting worker pid=29512 on localhost:11317 at 17:09:15.588
+starting worker pid=26700 on localhost:11317 at 17:09:15.592
+starting worker pid=30288 on localhost:11317 at 17:09:15.601
+starting worker pid=29064 on localhost:11317 at 17:09:15.605
+starting worker pid=19516 on localhost:11317 at 17:09:15.610
+starting worker pid=30116 on localhost:11317 at 17:09:15.614
+starting worker pid=28940 on localhost:11317 at 17:09:15.616
+starting worker pid=30120 on localhost:11317 at 17:09:15.617
+starting worker pid=30348 on localhost:11317 at 17:09:15.626
+starting worker pid=28632 on localhost:11317 at 17:09:15.628
+starting worker pid=29600 on localhost:11317 at 17:09:15.631
+starting worker pid=29076 on localhost:11317 at 17:09:15.637
+starting worker pid=16076 on localhost:11317 at 17:09:15.638
+starting worker pid=28480 on localhost:11317 at 17:09:15.641
+starting worker pid=25788 on localhost:11317 at 17:09:15.645
+starting worker pid=28892 on localhost:11317 at 17:09:15.647
+starting worker pid=29268 on localhost:11317 at 17:09:15.648
+Finished rep 9 / 100 for setting 1 / 3 at 2024-10-16 17:16:59.701524.
+Finished rep 25 / 100 for setting 1 / 3 at 2024-10-16 17:17:10.951385.
+Finished rep 36 / 100 for setting 1 / 3 at 2024-10-16 17:17:11.228523.
+Finished rep 1 / 100 for setting 1 / 3 at 2024-10-16 17:17:13.851593.
+Finished rep 39 / 100 for setting 1 / 3 at 2024-10-16 17:17:15.574371.
+Finished rep 15 / 100 for setting 1 / 3 at 2024-10-16 17:17:16.100311.
+Finished rep 29 / 100 for setting 1 / 3 at 2024-10-16 17:17:19.889995.
+Finished rep 44 / 100 for setting 1 / 3 at 2024-10-16 17:17:20.086811.
+Finished rep 38 / 100 for setting 1 / 3 at 2024-10-16 17:17:21.991852.
+Finished rep 20 / 100 for setting 1 / 3 at 2024-10-16 17:17:22.747233.
+Finished rep 17 / 100 for setting 1 / 3 at 2024-10-16 17:17:24.552083.
+Finished rep 23 / 100 for setting 1 / 3 at 2024-10-16 17:17:26.851816.
+Finished rep 26 / 100 for setting 1 / 3 at 2024-10-16 17:17:27.752626.
+Finished rep 10 / 100 for setting 1 / 3 at 2024-10-16 17:17:27.943229.
+Finished rep 18 / 100 for setting 1 / 3 at 2024-10-16 17:17:29.644277.
+Finished rep 7 / 100 for setting 1 / 3 at 2024-10-16 17:17:30.542119.
+Finished rep 12 / 100 for setting 1 / 3 at 2024-10-16 17:17:31.526938.
+Finished rep 3 / 100 for setting 1 / 3 at 2024-10-16 17:17:31.8877.
+Finished rep 14 / 100 for setting 1 / 3 at 2024-10-16 17:17:33.059342.
+Finished rep 45 / 100 for setting 1 / 3 at 2024-10-16 17:17:36.296912.
+Finished rep 35 / 100 for setting 1 / 3 at 2024-10-16 17:17:39.286927.
+Finished rep 41 / 100 for setting 1 / 3 at 2024-10-16 17:17:39.607484.
+Finished rep 31 / 100 for setting 1 / 3 at 2024-10-16 17:17:39.641915.
+Finished rep 34 / 100 for setting 1 / 3 at 2024-10-16 17:17:40.873481.
+Finished rep 37 / 100 for setting 1 / 3 at 2024-10-16 17:17:42.163409.
+Finished rep 43 / 100 for setting 1 / 3 at 2024-10-16 17:17:42.993812.
+Finished rep 48 / 100 for setting 1 / 3 at 2024-10-16 17:17:43.293501.
+Finished rep 4 / 100 for setting 1 / 3 at 2024-10-16 17:17:45.436919.
+Finished rep 30 / 100 for setting 1 / 3 at 2024-10-16 17:17:46.723465.
+Finished rep 50 / 100 for setting 1 / 3 at 2024-10-16 17:17:51.490324.
+Finished rep 19 / 100 for setting 1 / 3 at 2024-10-16 17:17:52.900499.
+Finished rep 47 / 100 for setting 1 / 3 at 2024-10-16 17:17:53.188359.
+Finished rep 28 / 100 for setting 1 / 3 at 2024-10-16 17:17:54.052844.
+Finished rep 49 / 100 for setting 1 / 3 at 2024-10-16 17:17:55.561639.
+Finished rep 6 / 100 for setting 1 / 3 at 2024-10-16 17:17:55.954865.
+Finished rep 11 / 100 for setting 1 / 3 at 2024-10-16 17:17:56.27259.
+Finished rep 5 / 100 for setting 1 / 3 at 2024-10-16 17:17:56.699242.
+Finished rep 33 / 100 for setting 1 / 3 at 2024-10-16 17:17:57.432702.
+Finished rep 40 / 100 for setting 1 / 3 at 2024-10-16 17:17:59.519866.
+Finished rep 8 / 100 for setting 1 / 3 at 2024-10-16 17:18:00.441958.
+Finished rep 32 / 100 for setting 1 / 3 at 2024-10-16 17:18:01.152387.
+Finished rep 16 / 100 for setting 1 / 3 at 2024-10-16 17:18:02.51762.
+Finished rep 21 / 100 for setting 1 / 3 at 2024-10-16 17:18:03.819901.
+Finished rep 24 / 100 for setting 1 / 3 at 2024-10-16 17:18:06.09569.
+Finished rep 22 / 100 for setting 1 / 3 at 2024-10-16 17:18:07.803096.
+Finished rep 42 / 100 for setting 1 / 3 at 2024-10-16 17:18:10.56843.
+Finished rep 13 / 100 for setting 1 / 3 at 2024-10-16 17:18:16.246372.
+Finished rep 27 / 100 for setting 1 / 3 at 2024-10-16 17:18:20.482635.
+Finished rep 2 / 100 for setting 1 / 3 at 2024-10-16 17:18:21.450949.
+Finished rep 46 / 100 for setting 1 / 3 at 2024-10-16 17:18:27.623942.
+Finished rep 52 / 100 for setting 1 / 3 at 2024-10-16 17:20:40.557234.
+Finished rep 51 / 100 for setting 1 / 3 at 2024-10-16 17:20:43.856739.
+Finished rep 1 / 100 for setting 2 / 3 at 2024-10-16 17:20:52.362969.
+Finished rep 58 / 100 for setting 1 / 3 at 2024-10-16 17:20:52.798511.
+Finished rep 2 / 100 for setting 2 / 3 at 2024-10-16 17:20:55.673639.
+Finished rep 3 / 100 for setting 2 / 3 at 2024-10-16 17:21:03.813499.
+Finished rep 4 / 100 for setting 2 / 3 at 2024-10-16 17:21:04.572172.
+Finished rep 63 / 100 for setting 1 / 3 at 2024-10-16 17:21:07.248546.
+Finished rep 5 / 100 for setting 2 / 3 at 2024-10-16 17:21:07.696484.
+Finished rep 57 / 100 for setting 1 / 3 at 2024-10-16 17:21:07.829556.
+Finished rep 55 / 100 for setting 1 / 3 at 2024-10-16 17:21:12.33269.
+Finished rep 6 / 100 for setting 2 / 3 at 2024-10-16 17:21:15.212475.
+Finished rep 53 / 100 for setting 1 / 3 at 2024-10-16 17:21:15.431708.
+Finished rep 60 / 100 for setting 1 / 3 at 2024-10-16 17:21:16.139005.
+Finished rep 62 / 100 for setting 1 / 3 at 2024-10-16 17:21:17.001442.
+Finished rep 9 / 100 for setting 2 / 3 at 2024-10-16 17:21:19.446508.
+Finished rep 8 / 100 for setting 2 / 3 at 2024-10-16 17:21:19.45271.
+Finished rep 54 / 100 for setting 1 / 3 at 2024-10-16 17:21:19.564008.
+Finished rep 10 / 100 for setting 2 / 3 at 2024-10-16 17:21:21.617583.
+Finished rep 7 / 100 for setting 2 / 3 at 2024-10-16 17:21:21.751219.
+Finished rep 69 / 100 for setting 1 / 3 at 2024-10-16 17:21:23.329948.
+Finished rep 11 / 100 for setting 2 / 3 at 2024-10-16 17:21:24.410616.
+Finished rep 81 / 100 for setting 1 / 3 at 2024-10-16 17:21:26.415373.
+Finished rep 12 / 100 for setting 2 / 3 at 2024-10-16 17:21:27.058026.
+Finished rep 13 / 100 for setting 2 / 3 at 2024-10-16 17:21:27.959301.
+Finished rep 56 / 100 for setting 1 / 3 at 2024-10-16 17:21:28.982735.
+Finished rep 16 / 100 for setting 2 / 3 at 2024-10-16 17:21:31.218149.
+Finished rep 17 / 100 for setting 2 / 3 at 2024-10-16 17:21:31.777356.
+Finished rep 14 / 100 for setting 2 / 3 at 2024-10-16 17:21:33.313863.
+Finished rep 15 / 100 for setting 2 / 3 at 2024-10-16 17:21:33.700841.
+Finished rep 19 / 100 for setting 2 / 3 at 2024-10-16 17:21:33.997089.
+Finished rep 84 / 100 for setting 1 / 3 at 2024-10-16 17:21:34.336663.
+Finished rep 66 / 100 for setting 1 / 3 at 2024-10-16 17:21:35.748471.
+Finished rep 22 / 100 for setting 2 / 3 at 2024-10-16 17:21:36.104468.
+Finished rep 21 / 100 for setting 2 / 3 at 2024-10-16 17:21:36.557544.
+Finished rep 18 / 100 for setting 2 / 3 at 2024-10-16 17:21:38.146376.
+Finished rep 24 / 100 for setting 2 / 3 at 2024-10-16 17:21:38.767812.
+Finished rep 23 / 100 for setting 2 / 3 at 2024-10-16 17:21:39.006417.
+Finished rep 20 / 100 for setting 2 / 3 at 2024-10-16 17:21:39.110287.
+Finished rep 25 / 100 for setting 2 / 3 at 2024-10-16 17:21:39.668157.
+Finished rep 59 / 100 for setting 1 / 3 at 2024-10-16 17:21:40.234388.
+Finished rep 64 / 100 for setting 1 / 3 at 2024-10-16 17:21:40.903634.
+Finished rep 27 / 100 for setting 2 / 3 at 2024-10-16 17:21:42.908781.
+Finished rep 28 / 100 for setting 2 / 3 at 2024-10-16 17:21:44.073146.
+Finished rep 79 / 100 for setting 1 / 3 at 2024-10-16 17:21:45.107896.
+Finished rep 30 / 100 for setting 2 / 3 at 2024-10-16 17:21:45.670055.
+Finished rep 31 / 100 for setting 2 / 3 at 2024-10-16 17:21:45.694304.
+Finished rep 26 / 100 for setting 2 / 3 at 2024-10-16 17:21:46.442478.
+Finished rep 32 / 100 for setting 2 / 3 at 2024-10-16 17:21:47.134334.
+Finished rep 34 / 100 for setting 2 / 3 at 2024-10-16 17:21:47.826309.
+Finished rep 71 / 100 for setting 1 / 3 at 2024-10-16 17:21:48.229444.
+Finished rep 33 / 100 for setting 2 / 3 at 2024-10-16 17:21:48.731575.
+Finished rep 35 / 100 for setting 2 / 3 at 2024-10-16 17:21:49.088017.
+Finished rep 37 / 100 for setting 2 / 3 at 2024-10-16 17:21:50.374664.
+Finished rep 38 / 100 for setting 2 / 3 at 2024-10-16 17:21:51.29112.
+Finished rep 65 / 100 for setting 1 / 3 at 2024-10-16 17:21:51.837325.
+Finished rep 29 / 100 for setting 2 / 3 at 2024-10-16 17:21:51.897782.
+Finished rep 40 / 100 for setting 2 / 3 at 2024-10-16 17:21:52.133117.
+Finished rep 41 / 100 for setting 2 / 3 at 2024-10-16 17:21:52.197456.
+Finished rep 43 / 100 for setting 2 / 3 at 2024-10-16 17:21:54.744292.
+Finished rep 39 / 100 for setting 2 / 3 at 2024-10-16 17:21:54.962728.
+Finished rep 68 / 100 for setting 1 / 3 at 2024-10-16 17:21:55.488584.
+Finished rep 36 / 100 for setting 2 / 3 at 2024-10-16 17:21:56.171149.
+Finished rep 44 / 100 for setting 2 / 3 at 2024-10-16 17:21:56.657345.
+Finished rep 47 / 100 for setting 2 / 3 at 2024-10-16 17:21:57.567018.
+Finished rep 45 / 100 for setting 2 / 3 at 2024-10-16 17:21:57.770365.
+Finished rep 42 / 100 for setting 2 / 3 at 2024-10-16 17:21:59.236576.
+Finished rep 51 / 100 for setting 2 / 3 at 2024-10-16 17:22:01.310254.
+Finished rep 52 / 100 for setting 2 / 3 at 2024-10-16 17:22:01.720783.
+Finished rep 54 / 100 for setting 2 / 3 at 2024-10-16 17:22:01.988843.
+Finished rep 49 / 100 for setting 2 / 3 at 2024-10-16 17:22:02.394424.
+Finished rep 46 / 100 for setting 2 / 3 at 2024-10-16 17:22:02.534519.
+Finished rep 75 / 100 for setting 1 / 3 at 2024-10-16 17:22:03.08067.
+Finished rep 55 / 100 for setting 2 / 3 at 2024-10-16 17:22:03.704911.
+Finished rep 48 / 100 for setting 2 / 3 at 2024-10-16 17:22:03.785564.
+Finished rep 58 / 100 for setting 2 / 3 at 2024-10-16 17:22:04.041323.
+Finished rep 50 / 100 for setting 2 / 3 at 2024-10-16 17:22:04.136404.
+Finished rep 59 / 100 for setting 2 / 3 at 2024-10-16 17:22:04.211885.
+Finished rep 53 / 100 for setting 2 / 3 at 2024-10-16 17:22:05.138905.
+Finished rep 72 / 100 for setting 1 / 3 at 2024-10-16 17:22:05.787738.
+Finished rep 60 / 100 for setting 2 / 3 at 2024-10-16 17:22:06.566081.
+Finished rep 61 / 100 for setting 2 / 3 at 2024-10-16 17:22:06.855718.
+Finished rep 94 / 100 for setting 1 / 3 at 2024-10-16 17:22:07.546364.
+Finished rep 76 / 100 for setting 1 / 3 at 2024-10-16 17:22:07.622939.
+Finished rep 62 / 100 for setting 2 / 3 at 2024-10-16 17:22:08.724799.
+Finished rep 70 / 100 for setting 1 / 3 at 2024-10-16 17:22:08.871128.
+Finished rep 64 / 100 for setting 2 / 3 at 2024-10-16 17:22:08.903234.
+Finished rep 85 / 100 for setting 1 / 3 at 2024-10-16 17:22:09.454589.
+Finished rep 66 / 100 for setting 2 / 3 at 2024-10-16 17:22:09.8585.
+Finished rep 67 / 100 for setting 1 / 3 at 2024-10-16 17:22:09.926932.
+Finished rep 56 / 100 for setting 2 / 3 at 2024-10-16 17:22:10.047569.
+Finished rep 57 / 100 for setting 2 / 3 at 2024-10-16 17:22:10.095419.
+Finished rep 65 / 100 for setting 2 / 3 at 2024-10-16 17:22:11.160931.
+Finished rep 89 / 100 for setting 1 / 3 at 2024-10-16 17:22:11.351307.
+Finished rep 63 / 100 for setting 2 / 3 at 2024-10-16 17:22:13.79552.
+Finished rep 68 / 100 for setting 2 / 3 at 2024-10-16 17:22:14.350271.
+Finished rep 70 / 100 for setting 2 / 3 at 2024-10-16 17:22:14.707728.
+Finished rep 73 / 100 for setting 1 / 3 at 2024-10-16 17:22:14.823429.
+Finished rep 69 / 100 for setting 2 / 3 at 2024-10-16 17:22:14.835871.
+Finished rep 61 / 100 for setting 1 / 3 at 2024-10-16 17:22:14.942678.
+Finished rep 78 / 100 for setting 1 / 3 at 2024-10-16 17:22:14.978711.
+Finished rep 72 / 100 for setting 2 / 3 at 2024-10-16 17:22:15.059941.
+Finished rep 67 / 100 for setting 2 / 3 at 2024-10-16 17:22:15.710996.
+Finished rep 74 / 100 for setting 2 / 3 at 2024-10-16 17:22:15.828377.
+Finished rep 78 / 100 for setting 2 / 3 at 2024-10-16 17:22:16.836575.
+Finished rep 76 / 100 for setting 2 / 3 at 2024-10-16 17:22:17.180963.
+Finished rep 73 / 100 for setting 2 / 3 at 2024-10-16 17:22:18.029604.
+Finished rep 71 / 100 for setting 2 / 3 at 2024-10-16 17:22:18.168311.
+Finished rep 82 / 100 for setting 2 / 3 at 2024-10-16 17:22:18.378812.
+Finished rep 81 / 100 for setting 2 / 3 at 2024-10-16 17:22:18.657277.
+Finished rep 80 / 100 for setting 2 / 3 at 2024-10-16 17:22:19.128237.
+Finished rep 77 / 100 for setting 1 / 3 at 2024-10-16 17:22:20.428426.
+Finished rep 79 / 100 for setting 2 / 3 at 2024-10-16 17:22:20.625875.
+Finished rep 75 / 100 for setting 2 / 3 at 2024-10-16 17:22:20.889559.
+Finished rep 87 / 100 for setting 2 / 3 at 2024-10-16 17:22:21.37921.
+Finished rep 77 / 100 for setting 2 / 3 at 2024-10-16 17:22:21.564021.
+Finished rep 92 / 100 for setting 1 / 3 at 2024-10-16 17:22:21.698437.
+Finished rep 89 / 100 for setting 2 / 3 at 2024-10-16 17:22:22.297525.
+Finished rep 86 / 100 for setting 2 / 3 at 2024-10-16 17:22:22.45374.
+Finished rep 84 / 100 for setting 2 / 3 at 2024-10-16 17:22:24.21273.
+Finished rep 83 / 100 for setting 2 / 3 at 2024-10-16 17:22:24.512739.
+Finished rep 90 / 100 for setting 2 / 3 at 2024-10-16 17:22:24.564557.
+Finished rep 87 / 100 for setting 1 / 3 at 2024-10-16 17:22:24.917892.
+Finished rep 93 / 100 for setting 2 / 3 at 2024-10-16 17:22:24.937345.
+Finished rep 96 / 100 for setting 1 / 3 at 2024-10-16 17:22:25.729662.
+Finished rep 88 / 100 for setting 2 / 3 at 2024-10-16 17:22:25.795872.
+Finished rep 85 / 100 for setting 2 / 3 at 2024-10-16 17:22:25.952794.
+Finished rep 94 / 100 for setting 2 / 3 at 2024-10-16 17:22:25.996735.
+Finished rep 96 / 100 for setting 2 / 3 at 2024-10-16 17:22:27.636783.
+Finished rep 99 / 100 for setting 2 / 3 at 2024-10-16 17:22:27.87448.
+Finished rep 98 / 100 for setting 2 / 3 at 2024-10-16 17:22:28.15775.
+Finished rep 91 / 100 for setting 2 / 3 at 2024-10-16 17:22:28.186675.
+Finished rep 95 / 100 for setting 2 / 3 at 2024-10-16 17:22:28.865991.
+Finished rep 92 / 100 for setting 2 / 3 at 2024-10-16 17:22:29.026174.
+Finished rep 97 / 100 for setting 2 / 3 at 2024-10-16 17:22:30.275585.
+Finished rep 82 / 100 for setting 1 / 3 at 2024-10-16 17:22:32.687036.
+Finished rep 100 / 100 for setting 2 / 3 at 2024-10-16 17:22:33.375145.
+Finished rep 99 / 100 for setting 1 / 3 at 2024-10-16 17:22:35.535024.
+Finished rep 88 / 100 for setting 1 / 3 at 2024-10-16 17:22:39.537011.
+Finished rep 93 / 100 for setting 1 / 3 at 2024-10-16 17:22:40.037584.
+Finished rep 86 / 100 for setting 1 / 3 at 2024-10-16 17:22:41.435161.
+Finished rep 80 / 100 for setting 1 / 3 at 2024-10-16 17:22:42.754562.
+Finished rep 83 / 100 for setting 1 / 3 at 2024-10-16 17:22:54.41276.
+Finished rep 74 / 100 for setting 1 / 3 at 2024-10-16 17:22:55.841411.
+Finished rep 91 / 100 for setting 1 / 3 at 2024-10-16 17:22:56.370512.
+Finished rep 98 / 100 for setting 1 / 3 at 2024-10-16 17:23:07.733613.
+Finished rep 90 / 100 for setting 1 / 3 at 2024-10-16 17:23:12.799971.
+Finished rep 95 / 100 for setting 1 / 3 at 2024-10-16 17:23:17.013612.
+Finished rep 100 / 100 for setting 1 / 3 at 2024-10-16 17:23:17.946655.
+Finished rep 97 / 100 for setting 1 / 3 at 2024-10-16 17:23:28.259182.
+Finished rep 6 / 100 for setting 3 / 3 at 2024-10-16 17:25:25.111229.
+Finished rep 15 / 100 for setting 3 / 3 at 2024-10-16 17:25:31.626542.
+Finished rep 18 / 100 for setting 3 / 3 at 2024-10-16 17:25:31.958681.
+Finished rep 1 / 100 for setting 3 / 3 at 2024-10-16 17:25:32.808287.
+Finished rep 12 / 100 for setting 3 / 3 at 2024-10-16 17:25:34.850466.
+Finished rep 13 / 100 for setting 3 / 3 at 2024-10-16 17:25:38.440976.
+Finished rep 7 / 100 for setting 3 / 3 at 2024-10-16 17:25:39.28052.
+Finished rep 19 / 100 for setting 3 / 3 at 2024-10-16 17:25:43.981145.
+Finished rep 14 / 100 for setting 3 / 3 at 2024-10-16 17:25:44.681065.
+Finished rep 22 / 100 for setting 3 / 3 at 2024-10-16 17:25:45.369517.
+Finished rep 35 / 100 for setting 3 / 3 at 2024-10-16 17:25:46.321215.
+Finished rep 9 / 100 for setting 3 / 3 at 2024-10-16 17:25:48.061862.
+Finished rep 30 / 100 for setting 3 / 3 at 2024-10-16 17:25:48.081353.
+Finished rep 11 / 100 for setting 3 / 3 at 2024-10-16 17:25:49.787456.
+Finished rep 39 / 100 for setting 3 / 3 at 2024-10-16 17:25:49.951574.
+Finished rep 5 / 100 for setting 3 / 3 at 2024-10-16 17:25:50.372036.
+Finished rep 8 / 100 for setting 3 / 3 at 2024-10-16 17:25:51.997675.
+Finished rep 41 / 100 for setting 3 / 3 at 2024-10-16 17:25:52.309689.
+Finished rep 27 / 100 for setting 3 / 3 at 2024-10-16 17:25:54.015836.
+Finished rep 17 / 100 for setting 3 / 3 at 2024-10-16 17:25:57.533811.
+Finished rep 24 / 100 for setting 3 / 3 at 2024-10-16 17:25:58.680874.
+Finished rep 37 / 100 for setting 3 / 3 at 2024-10-16 17:26:02.823116.
+Finished rep 43 / 100 for setting 3 / 3 at 2024-10-16 17:26:05.371087.
+Finished rep 3 / 100 for setting 3 / 3 at 2024-10-16 17:26:06.629865.
+Finished rep 2 / 100 for setting 3 / 3 at 2024-10-16 17:26:10.437045.
+Finished rep 31 / 100 for setting 3 / 3 at 2024-10-16 17:26:13.210858.
+Finished rep 33 / 100 for setting 3 / 3 at 2024-10-16 17:26:14.337478.
+Finished rep 4 / 100 for setting 3 / 3 at 2024-10-16 17:26:15.271284.
+Finished rep 10 / 100 for setting 3 / 3 at 2024-10-16 17:26:15.947848.
+Finished rep 16 / 100 for setting 3 / 3 at 2024-10-16 17:26:16.543664.
+Finished rep 32 / 100 for setting 3 / 3 at 2024-10-16 17:26:17.333533.
+Finished rep 25 / 100 for setting 3 / 3 at 2024-10-16 17:26:17.751058.
+Finished rep 28 / 100 for setting 3 / 3 at 2024-10-16 17:26:18.398735.
+Finished rep 23 / 100 for setting 3 / 3 at 2024-10-16 17:26:19.050928.
+Finished rep 44 / 100 for setting 3 / 3 at 2024-10-16 17:26:21.882702.
+Finished rep 34 / 100 for setting 3 / 3 at 2024-10-16 17:26:22.804318.
+Finished rep 20 / 100 for setting 3 / 3 at 2024-10-16 17:26:23.326562.
+Finished rep 26 / 100 for setting 3 / 3 at 2024-10-16 17:26:23.532395.
+Finished rep 29 / 100 for setting 3 / 3 at 2024-10-16 17:26:24.919397.
+Finished rep 21 / 100 for setting 3 / 3 at 2024-10-16 17:26:29.305692.
+Finished rep 36 / 100 for setting 3 / 3 at 2024-10-16 17:26:32.635568.
+Finished rep 45 / 100 for setting 3 / 3 at 2024-10-16 17:26:32.905026.
+Finished rep 40 / 100 for setting 3 / 3 at 2024-10-16 17:26:33.465312.
+Finished rep 42 / 100 for setting 3 / 3 at 2024-10-16 17:26:36.700589.
+Finished rep 38 / 100 for setting 3 / 3 at 2024-10-16 17:26:44.110901.
+Finished rep 48 / 100 for setting 3 / 3 at 2024-10-16 17:26:49.724988.
+Finished rep 46 / 100 for setting 3 / 3 at 2024-10-16 17:26:55.792181.
+Finished rep 47 / 100 for setting 3 / 3 at 2024-10-16 17:27:05.408508.
+Finished rep 49 / 100 for setting 3 / 3 at 2024-10-16 17:27:13.143638.
+Finished rep 50 / 100 for setting 3 / 3 at 2024-10-16 17:27:20.925047.
+Finished rep 51 / 100 for setting 3 / 3 at 2024-10-16 17:28:35.234763.
+Finished rep 61 / 100 for setting 3 / 3 at 2024-10-16 17:28:51.029004.
+Finished rep 65 / 100 for setting 3 / 3 at 2024-10-16 17:28:55.185731.
+Finished rep 56 / 100 for setting 3 / 3 at 2024-10-16 17:28:55.710099.
+Finished rep 55 / 100 for setting 3 / 3 at 2024-10-16 17:28:56.110631.
+Finished rep 54 / 100 for setting 3 / 3 at 2024-10-16 17:28:59.348638.
+Finished rep 53 / 100 for setting 3 / 3 at 2024-10-16 17:28:59.503899.
+Finished rep 66 / 100 for setting 3 / 3 at 2024-10-16 17:29:00.927945.
+Finished rep 52 / 100 for setting 3 / 3 at 2024-10-16 17:29:01.816774.
+Finished rep 60 / 100 for setting 3 / 3 at 2024-10-16 17:29:02.532026.
+Finished rep 59 / 100 for setting 3 / 3 at 2024-10-16 17:29:02.646119.
+Finished rep 71 / 100 for setting 3 / 3 at 2024-10-16 17:29:04.135011.
+Finished rep 63 / 100 for setting 3 / 3 at 2024-10-16 17:29:04.881123.
+Finished rep 62 / 100 for setting 3 / 3 at 2024-10-16 17:29:07.60377.
+Finished rep 68 / 100 for setting 3 / 3 at 2024-10-16 17:29:11.113375.
+Finished rep 58 / 100 for setting 3 / 3 at 2024-10-16 17:29:13.843545.
+Finished rep 75 / 100 for setting 3 / 3 at 2024-10-16 17:29:19.930623.
+Finished rep 64 / 100 for setting 3 / 3 at 2024-10-16 17:29:21.935013.
+Finished rep 69 / 100 for setting 3 / 3 at 2024-10-16 17:29:24.456722.
+Finished rep 67 / 100 for setting 3 / 3 at 2024-10-16 17:29:27.085216.
+Finished rep 80 / 100 for setting 3 / 3 at 2024-10-16 17:29:30.063244.
+Finished rep 88 / 100 for setting 3 / 3 at 2024-10-16 17:29:31.057413.
+Finished rep 74 / 100 for setting 3 / 3 at 2024-10-16 17:29:31.437486.
+Finished rep 78 / 100 for setting 3 / 3 at 2024-10-16 17:29:31.467499.
+Finished rep 72 / 100 for setting 3 / 3 at 2024-10-16 17:29:35.074826.
+Finished rep 57 / 100 for setting 3 / 3 at 2024-10-16 17:29:35.269373.
+Finished rep 82 / 100 for setting 3 / 3 at 2024-10-16 17:29:36.632865.
+Finished rep 70 / 100 for setting 3 / 3 at 2024-10-16 17:29:37.746543.
+Finished rep 81 / 100 for setting 3 / 3 at 2024-10-16 17:29:38.142841.
+Finished rep 73 / 100 for setting 3 / 3 at 2024-10-16 17:29:42.670371.
+Finished rep 77 / 100 for setting 3 / 3 at 2024-10-16 17:29:45.554453.
+Finished rep 87 / 100 for setting 3 / 3 at 2024-10-16 17:29:47.931188.
+Finished rep 79 / 100 for setting 3 / 3 at 2024-10-16 17:29:48.023926.
+Finished rep 86 / 100 for setting 3 / 3 at 2024-10-16 17:29:48.446079.
+Finished rep 85 / 100 for setting 3 / 3 at 2024-10-16 17:29:49.135749.
+Finished rep 92 / 100 for setting 3 / 3 at 2024-10-16 17:29:50.630178.
+Finished rep 91 / 100 for setting 3 / 3 at 2024-10-16 17:29:53.669864.
+Finished rep 84 / 100 for setting 3 / 3 at 2024-10-16 17:29:54.120567.
+Finished rep 90 / 100 for setting 3 / 3 at 2024-10-16 17:29:57.381412.
+Finished rep 97 / 100 for setting 3 / 3 at 2024-10-16 17:30:03.352086.
+Finished rep 89 / 100 for setting 3 / 3 at 2024-10-16 17:30:07.327916.
+Finished rep 93 / 100 for setting 3 / 3 at 2024-10-16 17:30:10.56835.
+Finished rep 76 / 100 for setting 3 / 3 at 2024-10-16 17:30:10.733016.
+Finished rep 83 / 100 for setting 3 / 3 at 2024-10-16 17:30:11.236597.
+Finished rep 96 / 100 for setting 3 / 3 at 2024-10-16 17:30:11.477836.
+Finished rep 95 / 100 for setting 3 / 3 at 2024-10-16 17:30:13.309872.
+Finished rep 98 / 100 for setting 3 / 3 at 2024-10-16 17:30:19.245418.
+Finished rep 94 / 100 for setting 3 / 3 at 2024-10-16 17:30:19.307675.
+Finished rep 99 / 100 for setting 3 / 3 at 2024-10-16 17:30:27.420342.
+Finished rep 100 / 100 for setting 3 / 3 at 2024-10-16 17:30:28.713272.

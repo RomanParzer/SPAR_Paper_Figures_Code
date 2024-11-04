@@ -24,7 +24,14 @@ c(n,p,act_setting,ntest,snr,cov_setting,m,beta) %<-% simulation_settings
 #   z <- robustHD::standardize(x)
 #   yz <- robustHD::standardize(y)
 # 
-#   HOLP <- crossprod(z,solve(tcrossprod(z),yz,tol=1e-30))
+#   eig <- eigen(tcrossprod(z),symmetric = TRUE)
+#   if (sum(eig$values>1e-8) >= (n-1)) {
+#     myinv <- tcrossprod(eig$vectors[,eig$values>1e-8]%*%diag(1/sqrt(eig$values[eig$values>1e-8])))
+#     solve_res <- myinv%*%yz
+#   } else {
+#     solve_res <- solve(tcrossprod(z)+(sqrt(p)+sqrt(n))*diag(n),yz)
+#   }
+#   HOLP <- crossprod(z,solve_res)
 #   rid2 <- crossprod(z,solve(tcrossprod(z)+(sqrt(p)+sqrt(n))*diag(n),yz))
 #   cvridgeres <- glmnet::cv.glmnet(z,yz,standardize=FALSE,alpha=0,folds=10)
 #   myl <- cvridgeres$lambda.1se

@@ -74,7 +74,8 @@ methods <- list("HOLP"=myOLS,
                 "TARP"=myTARP,
                 "SPAR"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=20,nlambda=1)},
                 "SPAR CV"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=c(10,20,30,50,100),opt_par = "best")},
-                "SPAR CV 1se"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=c(10,20,30,50,100),opt_par = "1se")})
+                "SPAR CV 1se"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=c(10,20,30,50,100),opt_par = "1se")},
+                "HOLPScr"=myHOLPScr)
 
 
 measures <- c("rMSPE","rMSPE_tr","Time","Precision","Recall","activeEE","passiveEE","numAct","AUC","pAUC")
@@ -103,6 +104,7 @@ fits <- vector(mode="list",length = nset)
 
 clusterExport(my.cluster,c('simulation_settings','nmeas','nmethods','methods','mydata','generate_data_rateye'), envir = environment())
 clusterEvalQ(my.cluster, {  
+  pacman::p_load(ROCR)
   source("../functions/multi_assign.R")
   source("../functions/methods.R")
 })
