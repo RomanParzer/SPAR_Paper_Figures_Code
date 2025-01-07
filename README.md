@@ -12,3 +12,41 @@ This repository consists of the following folders with described contents.
 - saved_results: .rds files produced from 'simulation' or 'data_application' folders
 - simulations: R-script for simulation study applying all methods on all simulation settings multiple times and saving the resulting .rds file to the folder 'saved_results'
 - TARP-master: R-code from 'Targeted Random Projection for Prediction From High-Dimensional Features' [(Mukhopadhyay and Dunson 2020)](https://github.com/david-dunson/TARP) adapted to return the estimated beta regression coefficient
+
+To enhance reproducibility, the following output was obtained from `sessionInfo()` after executing the header of the file 'simulations_SPAR_CV_022024.R'.
+
+R version 4.2.1 (2022-06-23)
+
+Platform: aarch64-apple-darwin20 (64-bit)
+
+Running under: macOS 14.3.1
+
+Matrix products: default
+
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRlapack.dylib
+
+locale:
+
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+
+[1] parallel  stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+
+ [1] spar_4.0.0        stringr_1.5.1     robustHD_0.8.0    robustbase_0.99-0 perry_0.3.1       ggplot2_3.5.1     SplitReg_1.0.2    MASS_7.3-60  
+ 
+ [9] SIS_0.8-8         glmnet_4.1-8      pls_2.8-1         Matrix_1.6-1.1    ROCR_1.0-11       dplyr_1.1.4       tidyr_1.3.1       foreach_1.5.2    
+
+loaded via a namespace (and not attached):
+
+ [1] Rcpp_1.0.13-1    DEoptimR_1.0-11  pillar_1.9.0     compiler_4.2.1   iterators_1.0.14 tools_4.2.1      lifecycle_1.0.4  tibble_3.2.1     gtable_0.3.6   
+ 
+[10] lattice_0.20-45  pkgconfig_2.0.3  rlang_1.1.4      cli_3.6.3        rstudioapi_0.13  withr_3.0.2      generics_0.1.3   vctrs_0.6.5      grid_4.2.1   
+
+[19] tidyselect_1.2.1 glue_1.8.0       R6_2.5.1         fansi_1.0.6      Rdpack_2.6.2     survival_3.3-1   pacman_0.5.1     purrr_1.0.2      magrittr_2.0.3  
+
+[28] rbibutils_2.3    scales_1.3.0     codetools_0.2-18 splines_4.2.1    colorspace_2.1-1 shape_1.4.6.1    ncvreg_3.14.1    utf8_1.2.4       stringi_1.8.4 
+
+[37] munsell_0.5.1
