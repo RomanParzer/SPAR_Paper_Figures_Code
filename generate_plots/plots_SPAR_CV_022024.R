@@ -202,7 +202,7 @@ mydf_time_sum %>%
   theme(legend.position="none") +
   labs(y="Time in s")
 
-# ggsave("../plots/SPAR_CV_CompTime_p.pdf", height = 6, width = 9)
+# ggsave("../plots/SPAR_CV_CompTime_p.pdf", height = 4.8, width = 9)
 
 
 ## # # rank sign test
