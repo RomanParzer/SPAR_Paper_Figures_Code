@@ -72,7 +72,7 @@ mydf_all %>% filter(Method %in% show_methods,p==2000,n==200,snr==10) %>%
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
   ggh4x::facet_grid2(cov_setting~act_setting, scales = "free_y",independent = "y") +
   theme(legend.position = "none")
-# ggsave(paste0("../plots/SPAR_CV_pAUC_cov_settings.pdf"), height = 10, width = 10)
+# ggsave(paste0("../plots/SPAR_CV_pAUC_cov_settings.pdf"), height = 10, width = 8)
 
 # AUC
 mydf_all %>% filter(Method %in% show_methods,p==2000,n==200,snr==10) %>%
