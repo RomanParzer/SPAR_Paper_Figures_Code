@@ -70,7 +70,8 @@ kab_numAct_all <- as.matrix(pivot_wider(med_df_all[med_df_all$Method%in%c(sparse
 # row.names(kab_rMSPE) <- tab_rMSPE$method
 require(knitr)
 # copy to latex
-kable(kab_numAct_all[,c(1,3,4,2)],format = "latex",booktabs=TRUE)
+# kable(kab_numAct_all[,c(1,3,4,2)],format = "latex",booktabs=TRUE)
+kable(t(kab_numAct_all[,c(1,3,4,2)]),format = "latex",booktabs=TRUE)
 
 # face application close
 
