@@ -27,22 +27,26 @@ methods <- list("HOLP"=myOLS,
                 "SPAR"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=20,nlambda=1)},
                 "SPAR CV"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=c(10,20,30,50,100),opt_par = "best")},
                 "SPAR CV 1se"=function(x,y,xtest){mySPAR(x,y,xtest,nummods=c(10,20,30,50,100),opt_par = "1se")},
-                "HOLPScr"=myHOLPScr)
+                "HOLPScr"=myHOLPScr,
+                "RF"=myRF,
+                "OWL"=myOWL,
+                "BAMP" = function(x,y,xtest){myBAMP(x,y,xtest,type = "Bayes",gamma=0.2,sigma2_prior = 1,sigma2_beta = 1)},
+                "AMP LASSO" = function(x,y,xtest){myBAMP(x,y,xtest,type = "LASSO",gamma=0.2,sigma2_beta = 1)})
 
 
 measures <- c("rMSPE","rMSPE_tr","Time","Precision","Recall","activeEE","passiveEE","numAct","AUC","pAUC")
 
 simulation_settings <- expand_grid(n=200, p=c(500,2000,10^4), act_setting=c("sparse","medium","dense"), 
-                                   ntest=100, snr=c(10),  cov_setting=c("group"))
+                                   ntest=1000, snr=c(10),  cov_setting=c("group"))
 
 simulation_settings <- rbind(simulation_settings,expand_grid(n=200, p=c(2000), act_setting=c("sparse","medium","dense"), 
-                                   ntest=100, snr=c(10),  cov_setting=c("ind","comsym","ar1","group","factor","extreme")))
+                                   ntest=1000, snr=c(10),  cov_setting=c("ind","comsym","ar1","group","factor","extreme")))
 
 simulation_settings <- rbind(simulation_settings,expand_grid(n=c(100,400,800), p=2000, act_setting=c("sparse","medium","dense"), 
-                                                             ntest=100, snr=10,  cov_setting="group"))
+                                                             ntest=1000, snr=10,  cov_setting="group"))
 
 simulation_settings <- rbind(simulation_settings,expand_grid(n=c(200), p=2000, act_setting=c("sparse","medium","dense"), 
-                                                             ntest=100, snr=c(1,5,20),  cov_setting="group"))
+                                                             ntest=1000, snr=c(1,5,20),  cov_setting="group"))
 
 simulation_settings <- simulation_settings %>% mutate(a = round(ifelse(act_setting=="sparse",2*log(p),
                                                                        ifelse(act_setting=="medium",n/2+2*log(p),p/4))))
@@ -69,7 +73,79 @@ clusterEvalQ(my.cluster, {
   source("../functions/data_generation.R")
   source("../functions/methods.R")
 })
-# i <- j <- 1
+# # # #.# # - - - - - - START of AMP experiments - - - - - - - # # # # # # 
+# # manually play around to check performance of BAMP (k=20)
+tmp_res <- readRDS("../saved_results/sims_SPAR_24_nset45_reps100_nmeth17.rds")
+j <- 2
+i <- 1
+parresi <- list(res=matrix(c(0),nmeas,nmethods),fits = vector(mode="list",length = nmethods))
+names(parresi$fits) <- names(methods)
+
+c(n,p,act_setting,ntest,snr,cov_setting,a) %<-% simulation_settings[j,]
+set.seed((1234+i)^2)
+data <- generate_data_linreg(n,p,cov_setting,ntest,snr=snr,a=a)
+x <- data$x
+y <- data$y
+xtest <- data$xtest
+ytest <- data$ytest
+rMSPEconst <- mean((ytest-mean(y))^2)
+rMSPEconst_tr <- var(y)
+
+# for just BAMP only execute the following with
+# k <- 20
+for (k in 18:nmethods) {
+  set.seed((1234+i)^2 + k)
+  tstamp <- Sys.time()
+  callres <- tryCatch( methods[[k]](x,y,xtest),
+                       error=function(error_message) {
+                         message(paste0("Error in ",names(methods)[k],": ",error_message))
+                         return(NULL)
+                       })
+  tmp_time <- as.numeric(Sys.time() - tstamp,units="secs")
+  
+  if (is.null(callres$beta)) {
+    parresi$res[,k] <- c(mean((callres$yhat-ytest)^2)/rMSPEconst, # rMSPE
+                         mean((callres$yhat_tr-y)^2)/rMSPEconst_tr, # rMSPE_tr
+                         tmp_time, # time
+                         NA, # precision
+                         NA, # recall
+                         NA, # activeEE
+                         NA, # passiveEE
+                         NA, # numAct
+                         NA, # AUC
+                         NA) # pAUC
+    
+    
+    
+  } else {
+    if ("dgCMatrix" %in% class(callres$beta)) {
+      tmp_ind <- callres$beta@i+1
+    } else {
+      tmp_ind <- which(callres$beta!=0)
+    }
+    parresi$res[,k] <- c(mean((callres$yhat-ytest)^2)/rMSPEconst, # rMSPE
+                         mean((callres$yhat_tr-y)^2)/rMSPEconst_tr, # rMSPE_tr
+                         tmp_time, # time
+                         ifelse(length(tmp_ind)==0,0,mean(tmp_ind %in% data$ind)), # precision
+                         mean(data$ind %in% tmp_ind), # recall
+                         mean((callres$beta[data$ind]-data$beta[data$ind])^2), # activeEE
+                         mean(callres$beta[-data$ind]^2), # passiveEE
+                         length(tmp_ind), # numAct
+                         performance(prediction(as.numeric(abs(callres$beta)),as.numeric(data$beta!=0)),measure="auc")@y.values[[1]], # AUC
+                         performance(prediction(as.numeric(abs(callres$beta)),as.numeric(data$beta!=0)),measure="auc",fpr.stop=n/2/(p-a))@y.values[[1]]) # pAUC
+  }
+  
+  
+  message(sprintf("Finished method %d / %d!",k,nmethods))
+}
+res[i,,,j] <- parresi$res
+res[i,,1:17,j] <- tmp_res$res[i,,,j]
+res[i,,,j]
+cat(sprintf('Finished rep %d / %d for setting %d / %d at %s.\n',i,nrep,j,nset,Sys.time()))
+
+# # # #.# # - - - - - - END of AMP experiments - - - - - - - # # # # # # 
+
+
 
 parres <- foreach(j = 1:nset) %:%
 foreach(i=1:nrep) %dopar% {
@@ -86,7 +162,6 @@ foreach(i=1:nrep) %dopar% {
     rMSPEconst <- mean((ytest-mean(y))^2)
     rMSPEconst_tr <- var(y)
     # k <- 17
-
     for (k in 1:nmethods) {
       set.seed((1234+i)^2 + k)
       tstamp <- Sys.time()
@@ -130,9 +205,10 @@ foreach(i=1:nrep) %dopar% {
       }
       
       
-      # message(sprintf("Finished method %d / %d!",k,nmethods))
+      message(sprintf("Finished method %d / %d!",k,nmethods))
     }
     # res[i,,,j] <- parresi$res
+    # res[i,,1:17,j] <- tmp_res$res[i,,,j]
     # res[i,,,j]
     cat(sprintf('Finished rep %d / %d for setting %d / %d at %s.\n',i,nrep,j,nset,Sys.time()))
     warnings()

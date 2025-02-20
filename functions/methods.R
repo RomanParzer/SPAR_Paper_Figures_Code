@@ -14,17 +14,17 @@
 # 9 TARP,
 # 10 SplitReg,
 # 11 NCT / GCT,
-# 12 RF?
+# 12 RF
 # 13 SPAR wrapper
 # 14 RP wrapper
 # 15 HOLP Screening Wrapper
+# 16 OWL
+# 17 B AMP
 
 # # install.packages("remotes")
 # remotes::install_github("RomanParzer/SPAR@v1.1.1")
 
-
-
-pacman::p_load(pls, glmnet, SIS, MASS, SplitReg, robustHD, stringr,SPAR,Matrix)
+pacman::p_load(pls, glmnet, SIS, MASS, SplitReg, robustHD, stringr,SPAR,Matrix,randomForest,owl)
 source("../TARP-master/TARP.R")
 source("../functions/RPM_generation.R")
 
@@ -237,6 +237,20 @@ myGCT <- function(x,y,xtest,phi=1,nfolds=10) {
 
 # # 12 RF?, use ranger and tuneRanger (tunemtryfast)
 
+myRF <- function(x,y,xtest) {
+  n <- length(y)
+  p <- ncol(x)
+  capture.output(
+    tRF <- tuneRF(x,y,ntreeTry = n, doBest=TRUE, stepFactor = 1.5, improve=0.01,trace=FALSE), 
+    file = nullfile()
+  )
+  mybeta <- as.numeric(tRF$importance)
+  
+  preds <- predict(tRF,newdata = rbind(x,xtest),type="response")
+  
+  return(list(yhat=preds[-(1:n)],yhat_tr=preds[1:n],beta=mybeta))
+}
+
 # # 13 SPAR
 mySPAR <- function(x,y,xtest,opt_par=c("best","1se"),nummods=c(20),nlambda=20) {
   if (nlambda==1 & length(nummods)==1) {
@@ -330,6 +344,154 @@ myHOLPScr <- function(x,y,xtest) {
   return(list(yhat=yhat, yhat_tr=yhat_tr,lambda=elnet_cv$lambda.1se,beta=mybeta,intercept=elnet$a0))
 }
 
+# 16 OWL
+myOWL <- function(x,y,xtest) {
+  # owltrain <- trainOwl(x,y,measure = "mse")
+  owlres <- owl(x,y,family="gaussian",sigma = 1)
+  coef <- coef(owlres)
+  yhat <- predict(owlres,xtest)
+  yhat_tr <- predict(owlres,x)
+  return(list(yhat=yhat, yhat_tr=yhat_tr,beta=coef[-1],intercept=coef[1]))
+}
+
+# 17 BAMP
+amp2_algorithm <- function(y, X, F_fun, G_fun, gamma = 0.1,
+                           sigma2_beta = NULL,
+                           tol = 1e-6, itmax = 1000, ...) {
+  # y: Observation vector
+  # X: Measurement matrix
+  # F: Denoising function
+  # F_prime: Derivative of F
+  # gamma is an estimate of the sparsity 1 - K/N, K no of non zeros
+  # tol: Convergence tolerance
+  # tmax: Maximum number of iterations
+  
+  M <- nrow(X)  # Number of measurements
+  N <- ncol(X)  # Number of unknowns
+  
+  # Initialization
+  beta_t <- rep(0, N)  # Initial estimate
+  Z_t <- y  # Initial residual
+  v_t <- rep(1, N)
+  
+  if (is.null(sigma2_beta)) sigma2_beta <- c(var(y))
+  
+  it <- 0  # Iteration counter
+  
+  repeat {
+    it <- it + 1  # Increment iteration
+    
+    V_t <- rowSums(sweep(X^2, 2,  v_t, "*"))
+    
+    sigma2_beta_V_t <- (sigma2_beta + V_t)
+    
+    Z_t_new <-  X %*% beta_t - V_t * (y - Z_t)/sigma2_beta_V_t
+    
+    Sigma_t <- 1/colSums(sweep(X^2, 1, sigma2_beta_V_t, "/"))
+    
+    
+    r_t <- 
+      beta_t + Sigma_t * colSums(X * drop((y - Z_t_new)/sigma2_beta_V_t))
+    
+    # print(summary(r_t))
+    beta_t_new <- F_fun(u=r_t, sigma=Sigma_t, 
+                        gamma=gamma,...)
+    v_t_new    <- G_fun(u=r_t, sigma = Sigma_t, 
+                        gamma=gamma, ...)
+    
+    # Convergence check
+    if (sum((beta_t_new - beta_t)^2) < tol *  sum(beta_t^2)|| it >= itmax) {
+      cat("Converged at iteration:", it, "\n")
+      break
+    }
+    # Divergence check
+    if (mean(beta_t_new^2)>1e12) {
+      cat("Diverged at iteration:", it, "\n")
+      return(NULL)
+      break
+    }
+    
+    # Update variables
+    beta_t <- beta_t_new
+    Z_t <- Z_t_new
+    v_t <- v_t_new
+  }
+  
+  return(list(beta=beta_t,it=it))
+}
+
+
+# Define the denoising function (soft-thresholding for sparse signals)
+soft_threshold_F <- function(u, sigma, gamma) {
+  ## here gamma is lambda, which can be chosen as sigma_eps
+  theta <- (sigma)  # Threshold scaling (can be tuned)
+  return(sign(u) * pmax(abs(u)- theta,0))
+}
+
+# Derivative of the denoising function
+soft_threshold_G <- function(u,  sigma, gamma) {
+  theta <- (sigma)
+  return(ifelse(abs(u) > theta, 1, 0))
+}
+
+# Sparse Binary Signal Prior
+sparse_binary_prior_F <- function(u, sigma, gamma) {
+  l <- (1 - 2 * u)/(2 * sigma) + log(gamma) - log(1 - gamma)
+  plogis(l)
+}
+sparse_binary_prior_G <- function(u, sigma, gamma) {
+  sparse_binary_prior_F(u, sigma, gamma) - 
+    sparse_binary_prior_F(u, sigma, gamma)^2 
+}
+sparse_binary_prior_F_derivative <- function(u, sigma, gamma) {
+  1/sigma * sparse_binary_prior_G(u, sigma, gamma)
+}
+
+# Sparse Gaussian Signal Prior
+sparse_gaussian_prior_F <- function(u, sigma, gamma, sigma2_prior = 1) {
+  q <- sigma2_prior/sigma
+  m <- gamma/(1 - gamma) * sqrt(1 + q) * exp(-u^2/(2 * sigma) *  q/(1 + q))
+  M <- q/(1 + q) * 1/(1 + m) 
+  u * M
+}
+sparse_gaussian_prior_G <- function(u, sigma, gamma, sigma2_prior = 1) {
+  q <- sigma2_prior/sigma
+  m <- gamma/(1 - gamma) * sqrt(1 + q) * exp(-u^2/(2 * sigma) *  q/(1 + q))
+  M <- q/(1 + q) * 1/(1 + m) 
+  sigma * M + m
+}
+sparse_gaussian_prior_F_derivative <- function(u, sigma, gamma, sigma2_prior = 1) {
+  1/sigma * sparse_gaussian_prior_G(u, sigma, gamma, 
+                                    sigma2_prior = sigma2_prior)
+}
+
+
+myBAMP <- function(x,y,xtest,type=c("Bayes","LASSO"),gamma=0.1,sigma2_beta=1,sigma2_prior=1) {
+  type <- match.arg(type)
+  if (type=="Bayes") {
+    ampres <- amp2_algorithm(y, x, 
+                             F_fun = sparse_gaussian_prior_F, 
+                             G_fun = sparse_gaussian_prior_G, 
+                             gamma = gamma,sigma2_beta=sigma2_beta,sigma2_prior=sigma2_prior,
+                             tol = 1e-6, itmax = 1000)
+  } else {
+    ampres <- amp2_algorithm(y, x, 
+                            F_fun = soft_threshold_F, 
+                            G_fun = soft_threshold_G, 
+                            gamma = gamma,sigma2_beta=sigma2_beta,
+                            tol = 1e-6, itmax = 1000) 
+  }
+  # what about intercept?
+  
+  
+  if (is.null(ampres)) {
+    return(NULL)
+  } else {
+    yhat <- xtest%*%ampres$beta
+    yhat_tr <- x%*%ampres$beta
+  }
+  return(list(yhat=yhat, yhat_tr=yhat_tr,beta=ampres$beta,intercept=0,it=ampres$it))
+}
 
 # # for testing:
 # source("./data_generation.R")

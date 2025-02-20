@@ -117,6 +117,7 @@ xtest <- myfacedata[c(9,12),-c(const_col_ind,4097)]
 ytest <- myfacedata[c(9,12),4097]
 
 require(SPAR)
+require(spar)
 set.seed(1234)
 face_res <- spar.cv(x,y,nummods = c(10,20,30,50,100))
 face_coef <- coef(face_res,opt_par = "best")
@@ -139,6 +140,7 @@ plot2 <- ggplot(data.frame(X=rep(1:64,each=64),Y=rep(64:1,64),`neg.coefs`=ifelse
 plot2
 
 i <- 9
+i <- 12
 plot3 <- ggplot(data.frame(X=rep(1:64,each=64),Y=rep(64:1,64),Z=facedata$images[,i]), aes(X, Y, fill= Z)) +
   geom_tile() +
   theme_void() +
@@ -160,3 +162,5 @@ require(gridExtra)
 grid.arrange(plot1, plot2,plot3,plot4, ncol=2)
 # ggsave("../plots/faces_vis_result.pdf",arrangeGrob(plot1, plot2,plot3,plot4,ncol=2),height = 8,width=8)
 
+grid.arrange(plot1,plot3,plot4, ncol=3)
+ggsave("../../plots/faces_vis_result3.pdf",arrangeGrob(plot2,plot3,plot4,ncol=3),height = 3.6,width=10)

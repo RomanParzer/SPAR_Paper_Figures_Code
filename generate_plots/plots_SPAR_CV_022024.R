@@ -65,6 +65,17 @@ mydf_all %>% filter(Method %in% show_methods,p==2000,n==200,snr==10) %>%
 # ggsave(paste0("../plots/SPAR_CV_rMSPE_cov_settings_HOLPScr.pdf"), height = 10, width = 8)
 
 
+mydf_all %>% filter(Method %in% show_methods,p==2000,n==200,snr==10,cov_setting %in% c("ind","comsym","ar1","group")) %>%
+  ggplot(aes(x=Method,y=rMSPE,fill=Method,linetype=isSparse)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
+  facet_grid(cov_setting~act_setting, scales = "free_y") +
+  coord_cartesian(ylim=c(0,1.35))+
+  theme(legend.position = "none") +
+  geom_hline(aes(yintercept=1),linetype=2)
+# ggsave(paste0("../plots/SPAR_CV_rMSPE_cov_settings1.pdf"), height = 6, width = 8)
+
+
 # pAUC
 mydf_all %>% filter(Method %in% show_methods,p==2000,n==200,snr==10) %>%
   ggplot(aes(x=Method,y=pAUC,fill=Method,linetype=isSparse)) +
