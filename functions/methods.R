@@ -355,7 +355,8 @@ myOWL <- function(x,y,xtest) {
 }
 
 # 17 BAMP
-amp2_algorithm <- function(y, X, F_fun, G_fun, gamma = 0.1,
+# Define the Vector AMP function from https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8713501
+vamp_algorithm <- function(y, X, F_fun, G_fun, gamma = 0.1,
                            sigma2_beta = NULL,
                            tol = 1e-6, itmax = 1000, ...) {
   # y: Observation vector
@@ -371,50 +372,45 @@ amp2_algorithm <- function(y, X, F_fun, G_fun, gamma = 0.1,
   
   # Initialization
   beta_t <- rep(0, N)  # Initial estimate
-  Z_t <- y  # Initial residual
-  v_t <- rep(1, N)
+  r_t <- rep(1, N)
+  gamma_t <- 1
+  
   
   if (is.null(sigma2_beta)) sigma2_beta <- c(var(y))
   
+  X_svd <- svd(X)
+  ytilde <- diag(1/X_svd$d) %*% crossprod(X_svd$u, y)
+  R <- sum(X_svd$d != 0)
   it <- 0  # Iteration counter
-  
   repeat {
     it <- it + 1  # Increment iteration
     
-    V_t <- rowSums(sweep(X^2, 2,  v_t, "*"))
+    beta_new_t <-  F_fun(u = r_t, sigma=1/gamma_t, 
+                         gamma=gamma)
+    alpha_t <-  mean(gamma_t * G_fun(u = r_t, sigma=1/gamma_t, 
+                                     gamma=gamma))
+    r_tilde_t <- (beta_new_t - alpha_t * r_t)/(1 - alpha_t)
     
-    sigma2_beta_V_t <- (sigma2_beta + V_t)
+    gamma_tilde_t <- gamma_t * (1 - alpha_t)/alpha_t
     
-    Z_t_new <-  X %*% beta_t - V_t * (y - Z_t)/sigma2_beta_V_t
+    d_t <- 1/sigma2_beta * 1/(X_svd$d^2/sigma2_beta + gamma_tilde_t) * X_svd$d^2
     
-    Sigma_t <- 1/colSums(sweep(X^2, 1, sigma2_beta_V_t, "/"))
+    gamma_new_t <- gamma_tilde_t * mean(d_t)/(N/R - mean(d_t))
     
+    r_new_t <- r_tilde_t + N/R * X_svd$v %*% diag(d_t/mean(d_t)) %*% 
+      (ytilde - crossprod(X_svd$v, r_tilde_t))
     
-    r_t <- 
-      beta_t + Sigma_t * colSums(X * drop((y - Z_t_new)/sigma2_beta_V_t))
-    
-    # print(summary(r_t))
-    beta_t_new <- F_fun(u=r_t, sigma=Sigma_t, 
-                        gamma=gamma,...)
-    v_t_new    <- G_fun(u=r_t, sigma = Sigma_t, 
-                        gamma=gamma, ...)
     
     # Convergence check
-    if (sum((beta_t_new - beta_t)^2) < tol *  sum(beta_t^2)|| it >= itmax) {
+    if (sum((beta_new_t - beta_t)^2) < tol *  sum(beta_t^2)|| it >= itmax) {
       cat("Converged at iteration:", it, "\n")
-      break
-    }
-    # Divergence check
-    if (mean(beta_t_new^2)>1e12) {
-      cat("Diverged at iteration:", it, "\n")
-      return(NULL)
       break
     }
     
     # Update variables
-    beta_t <- beta_t_new
-    Z_t <- Z_t_new
-    v_t <- v_t_new
+    beta_t <- beta_new_t
+    gamma_t <- gamma_new_t
+    r_t <- r_new_t
   }
   
   return(list(beta=beta_t,it=it))
@@ -465,25 +461,14 @@ sparse_gaussian_prior_F_derivative <- function(u, sigma, gamma, sigma2_prior = 1
                                     sigma2_prior = sigma2_prior)
 }
 
-
-myBAMP <- function(x,y,xtest,type=c("Bayes","LASSO"),gamma=0.1,sigma2_beta=1,sigma2_prior=1) {
-  type <- match.arg(type)
-  if (type=="Bayes") {
-    ampres <- amp2_algorithm(y, x, 
-                             F_fun = sparse_gaussian_prior_F, 
-                             G_fun = sparse_gaussian_prior_G, 
-                             gamma = gamma,sigma2_beta=sigma2_beta,sigma2_prior=sigma2_prior,
-                             tol = 1e-6, itmax = 1000)
-  } else {
-    ampres <- amp2_algorithm(y, x, 
-                            F_fun = soft_threshold_F, 
-                            G_fun = soft_threshold_G, 
-                            gamma = gamma,sigma2_beta=sigma2_beta,
-                            tol = 1e-6, itmax = 1000) 
-  }
-  # what about intercept?
-  
-  
+myBAMP <- function(x,y,xtest,gamma=0.5) {
+  ampres <- vamp_algorithm(y, X, 
+                           F_fun = sparse_gaussian_prior_F, 
+                           G_fun = sparse_gaussian_prior_G, 
+                           gamma = gamma,
+                           sigma2_beta = 1,
+                           tol = 1e-6, itmax = 500, 
+                           sigma2_prior = 1)
   if (is.null(ampres)) {
     return(NULL)
   } else {

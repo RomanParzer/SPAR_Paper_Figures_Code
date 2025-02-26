@@ -30,8 +30,7 @@ methods <- list("HOLP"=myOLS,
                 "HOLPScr"=myHOLPScr,
                 "RF"=myRF,
                 "OWL"=myOWL,
-                "BAMP" = function(x,y,xtest){myBAMP(x,y,xtest,type = "Bayes",gamma=0.2,sigma2_prior = 1,sigma2_beta = 1)},
-                "AMP LASSO" = function(x,y,xtest){myBAMP(x,y,xtest,type = "LASSO",gamma=0.2,sigma2_beta = 1)})
+                "BAMP" = function(x,y,xtest){myBAMP(x,y,xtest,gamma=0.8)})
 
 
 measures <- c("rMSPE","rMSPE_tr","Time","Precision","Recall","activeEE","passiveEE","numAct","AUC","pAUC")
@@ -77,6 +76,7 @@ clusterEvalQ(my.cluster, {
 # # manually play around to check performance of BAMP (k=20)
 tmp_res <- readRDS("../saved_results/sims_SPAR_24_nset45_reps100_nmeth17.rds")
 j <- 2
+j <- 16
 i <- 1
 parresi <- list(res=matrix(c(0),nmeas,nmethods),fits = vector(mode="list",length = nmethods))
 names(parresi$fits) <- names(methods)
@@ -144,8 +144,6 @@ res[i,,,j]
 cat(sprintf('Finished rep %d / %d for setting %d / %d at %s.\n',i,nrep,j,nset,Sys.time()))
 
 # # # #.# # - - - - - - END of AMP experiments - - - - - - - # # # # # # 
-
-
 
 parres <- foreach(j = 1:nset) %:%
 foreach(i=1:nrep) %dopar% {
