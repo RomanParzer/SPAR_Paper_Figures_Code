@@ -18,13 +18,13 @@
 # 13 SPAR wrapper
 # 14 RP wrapper
 # 15 HOLP Screening Wrapper
-# 16 OWL
+# 16 SLOPE
 # 17 B AMP
 
 # # install.packages("remotes")
 # remotes::install_github("RomanParzer/SPAR@v1.1.1")
 
-pacman::p_load(pls, glmnet, SIS, MASS, SplitReg, robustHD, stringr,SPAR,Matrix,randomForest,owl)
+pacman::p_load(pls, glmnet, SIS, MASS, SplitReg, robustHD, stringr,SPAR,Matrix,randomForest,SLOPE)
 source("../TARP-master/TARP.R")
 source("../functions/RPM_generation.R")
 
@@ -344,14 +344,27 @@ myHOLPScr <- function(x,y,xtest) {
   return(list(yhat=yhat, yhat_tr=yhat_tr,lambda=elnet_cv$lambda.1se,beta=mybeta,intercept=elnet$a0))
 }
 
-# 16 OWL
-myOWL <- function(x,y,xtest) {
-  # owltrain <- trainOwl(x,y,measure = "mse")
-  owlres <- owl(x,y,family="gaussian",sigma = 1)
-  coef <- coef(owlres)
-  yhat <- predict(owlres,xtest)
-  yhat_tr <- predict(owlres,x)
-  return(list(yhat=yhat, yhat_tr=yhat_tr,beta=coef[-1],intercept=coef[1]))
+# 16 SLOPE
+mySLOPE <- function(x,y,xtest,itmax=10) {
+  it <- 1
+  set <- integer(0)
+  setchange <- TRUE
+  while (it <= itmax & setchange) {
+    stopifnot(length(set)<length(y)-1)
+    lmres <- lm(y~.,data=data.frame(x[,set],y=y))
+    newalpha <- sqrt(sum(lmres$residuals^2)/lmres$df.residual)
+    sloperes <- SLOPE(x,y,alpha = newalpha/sqrt(length(y)))
+    coef <- coef(sloperes)
+    newset <- which(coef[-1]!=0)
+    if (identical(newset,set)){
+      setchange <- FALSE
+    }
+    it <- it+1
+    set <- newset 
+  }
+  yhat <- predict(sloperes,xtest)
+  yhat_tr <- predict(sloperes,x)
+  return(list(yhat=yhat, yhat_tr=yhat_tr,beta=coef[-1],intercept=coef[1],alpha=newalpha,it=it))
 }
 
 # 17 BAMP
@@ -403,7 +416,7 @@ vamp_algorithm <- function(y, X, F_fun, G_fun, gamma = 0.1,
     
     # Convergence check
     if (sum((beta_new_t - beta_t)^2) < tol *  sum(beta_t^2)|| it >= itmax) {
-      cat("Converged at iteration:", it, "\n")
+      # cat("Converged at iteration:", it, "\n")
       break
     }
     
@@ -462,7 +475,7 @@ sparse_gaussian_prior_F_derivative <- function(u, sigma, gamma, sigma2_prior = 1
 }
 
 myBAMP <- function(x,y,xtest,gamma=0.5) {
-  ampres <- vamp_algorithm(y, X, 
+  ampres <- vamp_algorithm(y, x, 
                            F_fun = sparse_gaussian_prior_F, 
                            G_fun = sparse_gaussian_prior_G, 
                            gamma = gamma,
