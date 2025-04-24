@@ -141,13 +141,13 @@ coef[-const_col_ind] <- face_coef$beta
 plot1 <- ggplot(data.frame(X=rep(1:64,each=64),Y=rep(64:1,64),`pos.coefs`=ifelse(coef>0,coef,0)), aes(X, Y, fill= `pos.coefs`)) +
   geom_tile() +
   theme_void() +
-  scale_fill_gradient2()
+  scale_fill_gradient2(transform = scales::transform_modulus(p=0.5))
 plot1
 
 plot2 <- ggplot(data.frame(X=rep(1:64,each=64),Y=rep(64:1,64),`neg.coefs`=ifelse(coef<0,coef,0)), aes(X, Y, fill= `neg.coefs`)) +
   geom_tile() +
   theme_void() +
-  scale_fill_gradient2()
+  scale_fill_gradient2(transform = scales::transform_modulus(p=0.5))
 plot2
 
 i <- 9
@@ -165,7 +165,7 @@ shap_vals[-const_col_ind] <- facedata$images[-const_col_ind,i]*face_coef$beta
 plot4 <- ggplot(data.frame(X=rep(1:64,each=64),Y=rep(64:1,64),effect=shap_vals), aes(X, Y, fill= effect)) +
   geom_tile() +
   theme_void() +
-  scale_fill_gradient2() +
+  scale_fill_gradient2(transform=scales::transform_modulus(p=0.5)) +
   ggtitle(bquote(hat(y) == .(round(predict(face_res,xnew=as.matrix(xtest),coef = face_coef)[which(i==c(9,12))],1)))) +
   theme(plot.title = element_text(hjust = 0.5)) 
 plot4

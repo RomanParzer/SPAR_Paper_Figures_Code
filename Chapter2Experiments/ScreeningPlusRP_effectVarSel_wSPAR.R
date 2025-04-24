@@ -113,10 +113,10 @@ levels(sum_df_rMSPE$Method) <- c("Scr_HOLP","ScrRP","SPAR")
 
 minScr <- min(sum_df_rMSPE$MSPE[sum_df_rMSPE$Method=="Scr_HOLP"])
 sum_df_rMSPE %>%
-  # filter(Method!="SPAR") %>%
+  filter(Method!="SPAR") %>%
   ggplot(aes(x=`Ratio of n of screened variables`,y=MSPE,col=Method)) +
   geom_line(size=1) +
-  geom_ribbon(aes(ymin=MSPE-sd,ymax=MSPE+sd),alpha=0.3) +
+  # geom_ribbon(aes(ymin=MSPE-sd,ymax=MSPE+sd),alpha=0.3) +
   geom_hline(data=data.frame(yintercept = min(sum_df_rMSPE$MSPE[sum_df_rMSPE$Method=="Scr_HOLP"])),aes(yintercept=yintercept),linetype=2) +
   geom_text(data=data.frame(x= 0.8,
                             y = minScr,
@@ -128,15 +128,15 @@ sum_df_rMSPE %>%
                             Method="ScrRP",
                             label=round(minScr,1)),
             aes(x=x,y=y,label=label),col=1,nudge_y = -0.7) +
-  geom_text(data=data.frame(x= 0.8,
-                            y = minScr,
-                            Method="SPAR",
-                            label=round(minScr,1)),
-            aes(x=x,y=y,label=label),col=1,nudge_y = -0.7) +
+  # geom_text(data=data.frame(x= 0.8,
+  #                           y = minScr,
+  #                           Method="SPAR",
+  #                           label=round(minScr,1)),
+  #           aes(x=x,y=y,label=label),col=1,nudge_y = -0.7) +
   scale_x_log10() +
   theme(legend.position = "none") +
   facet_grid(Method~., scales = "free_y") 
-# ggsave("../plots/ScRP_nsc_comsym_medium_no1.pdf", height = 5, width = 8)
+# ggsave("../plots/ScRP_nsc_comsym_medium_no1.pdf", height = 4, width = 8*0.8)
 # ggsave("../plots/ScRP_nsc_comsym_medium_no1_wSPAR.pdf", height = 5, width = 8)
 # ggsave("../plots/ScRP_nsc_comsym_medium_no1_wSPAR_woCI.pdf", height = 5, width = 8)
 

@@ -59,22 +59,22 @@ mydf_all <- mutate(mydf_all,"pAUC"=pAUC*2*(p-a)/n)
 mydf_all %>% filter(Method %in% show_methods,p==2000,n==200,snr==10) %>%
   ggplot(aes(x=Method,y=rMSPE,col=Method,linetype=isSparse)) +
   geom_boxplot() +
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
+  theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1)) +
   facet_grid(cov_setting~act_setting, scales = "free_y") +
   coord_cartesian(ylim=c(0,1.35))+
   theme(legend.position = "none") +
   geom_hline(aes(yintercept=1),linetype=2)
-# ggsave(paste0("../plots/SPAR_CV_rMSPE_cov_settings_25.pdf"), height = 10, width = 8)
+# ggsave(paste0("../plots/SPAR_CV_rMSPE_cov_settings_25.pdf"), height = 8, width = 8*0.8)
 
 
 # pAUC
 mydf_all %>% filter(Method %in% show_methods,p==2000,n==200,snr==10) %>%
   ggplot(aes(x=Method,y=pAUC,col=Method,linetype=isSparse)) +
   geom_boxplot() +
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
+  theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1)) +
   ggh4x::facet_grid2(cov_setting~act_setting, scales = "free_y",independent = "y") +
   theme(legend.position = "none")
-# ggsave(paste0("../plots/SPAR_CV_pAUC_cov_settings_25.pdf"), height = 10, width = 8)
+# ggsave(paste0("../plots/SPAR_CV_pAUC_cov_settings_25.pdf"), height = 8, width = 8*0.8)
 
 
 # Prec
@@ -211,7 +211,7 @@ mydf_time_sum %>%
                   aes(x=p,y=Time,label=Method),show.legend = FALSE) +
   theme(legend.position="none") +
   labs(y="Time in s")
-# ggsave("../plots/SPAR_CV_CompTime_p_25.pdf", height = 4.8, width = 9)
+# ggsave("../plots/SPAR_CV_CompTime_p_25.pdf", height = 4.8*0.8, width = 9*0.8)
 
 # show_methods <- c("BAMP","LASSO",show_methods)
 # ggsave("../plots/SPAR_CV_CompTime_p_25_BAMP_LASSO.pdf", height = 4.8, width = 9)

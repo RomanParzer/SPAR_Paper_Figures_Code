@@ -105,4 +105,4 @@ ggplot(df_rMSPE %>% filter(Projection!="HOLP"),aes(x=Projection,y=MSPE,fill=Proj
   geom_hline(yintercept=medPBeta+th_bound,linetype=2) +
   geom_segment(mapping=aes(x="SparseCW", y=medPBeta, xend="SparseCW", yend=medPBeta+th_bound), arrow=arrow(ends='both')) +
   annotate("text",x=3-0.25,y=300,label=as.character(tmp_lab),parse=TRUE)
-# ggsave("../plots/RP_comsym_medium_sparseSignB.pdf", height = 5, width = 10)
+# ggsave("../plots/RP_comsym_medium_sparseSignB.pdf", height = 4, width = 8)

@@ -147,7 +147,7 @@ sum_df_rMSPE %>%
   # geom_ribbon(aes(ymin=MSPE-sd,ymax=MSPE+sd),alpha=0.1) +
   # coord_cartesian(ylim=c(315,360)) + 
   geom_line(size=1)
-# ggsave("../plots/ScRP_comsym_medium.pdf", height = 5, width = 8)
+# ggsave("../plots/ScRP_comsym_medium.pdf", height = 4, width = 8*0.8)
 # ggsave("../plots/ScRP_comsym_medium_wSPAR.pdf", height = 5, width = 8)
 # ggsave("../plots/ScRP_comsym_medium_wSPAR_woCI.pdf", height = 5, width = 8)
 
