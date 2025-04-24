@@ -94,8 +94,7 @@ PrecRec_long %>%
   scale_x_log10() +
   labs(x="Number of selected variables",y="") +
   geom_vline(xintercept=100,col="black",size=0.5,alpha=0.5)
-
-# ggsave("../plots/Screening_comsym_medium.pdf", height = 6, width = 6)
+# ggsave("../plots/Screening_comsym_medium.pdf", height = 6*0.8, width = 6*0.8)
 
 hist_df_long <- hist_df %>%
   pivot_longer(1:4,names_to = "Method",values_to = "abs.coefs")
@@ -107,7 +106,6 @@ hist_df_long %>%
   scale_fill_brewer(palette = "Set1") +
   facet_wrap(Method~.,scales = "free",nrow=4, strip.position="right") +
   labs(x="Absolute coefficients",y="Density",color="Predictors",linetype="Predictors")
-
-# ggsave("../plots/Hist_comsym_medium_all.pdf", height = 6, width = 6)
+# ggsave("../plots/Hist_comsym_medium_all.pdf", height = 6*0.8, width = 6*0.8)
 
 

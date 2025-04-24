@@ -157,7 +157,7 @@ tmp_df %>%
   scale_linetype(guide="none")+
   theme(legend.position = "none") +
   geom_hline(data=data.frame(yintercept = 1,Measure="rMSPE"),aes(yintercept=yintercept),linetype=2)
-# ggsave(paste0("../plots/SPAR_CV_group_medium_decP_25.pdf"), height = 5, width = 10)
+# ggsave(paste0("../plots/SPAR_CV_group_medium_decP_25.pdf"), height = 5*0.8, width = 8)
 
 # plot group medium over n 
 
@@ -172,7 +172,7 @@ mydf_all %>% filter(Method %in% show_methods,Method!="RP_CW",cov_setting=="group
   scale_linetype(guide="none")+
   theme(legend.position = "none") +
   geom_hline(data=data.frame(yintercept = 1,Measure="rMSPE"),aes(yintercept=yintercept),linetype=2)
-# ggsave(paste0("../plots/SPAR_CV_group_medium_incN_25.pdf"), height = 5, width = 10)
+# ggsave(paste0("../plots/SPAR_CV_group_medium_incN_25.pdf"), height = 5*0.8, width = 8)
 
 # plot group medium over snr 
 
@@ -187,7 +187,7 @@ mydf_all %>% filter(Method %in% show_methods,Method!="RP_CW",cov_setting=="group
   scale_linetype(guide="none") +
   theme(legend.position = "none") +
   geom_hline(data=data.frame(yintercept = 1,Measure="rMSPE"),aes(yintercept=yintercept),linetype=2)
-# ggsave(paste0("../plots/SPAR_CV_group_medium_incSNR_25.pdf"), height = 5, width = 10)
+# ggsave(paste0("../plots/SPAR_CV_group_medium_incSNR_25.pdf"), height = 5*0.8, width = 8)
 
 # plot Ctime
 myp <- c(500,2000,10^4)

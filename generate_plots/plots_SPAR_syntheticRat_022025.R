@@ -61,7 +61,7 @@ mydf_all %>% filter(Method %in% show_methods,snr==10) %>%
   coord_cartesian(ylim=c(0,1.35))+
   theme(legend.position = "none") +
   geom_hline(yintercept=1,linetype=2)
-# ggsave(paste0("../plots/SPAR_rMSPE_synthRateye_25.pdf"), height = 6, width = 8)
+# ggsave(paste0("../plots/SPAR_rMSPE_synthRateye_25.pdf"), height = 5, width = 8)
 
 # pAUC
 mydf_all %>% filter(Method %in% show_methods,snr==10) %>%
@@ -70,7 +70,7 @@ mydf_all %>% filter(Method %in% show_methods,snr==10) %>%
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
   ggh4x::facet_grid2(p~act_setting, scales = "free_y",independent = "y") +
   theme(legend.position = "none")
-# ggsave(paste0("../plots/SPAR_pAUC_synthRateye_25.pdf"), height = 6, width = 10)
+# ggsave(paste0("../plots/SPAR_pAUC_synthRateye_25.pdf"), height = 5, width = 8)
 
 # optional:
 # # table of ranks for pAUC and rMSPE
