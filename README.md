@@ -1,5 +1,6 @@
 # SPAR_Paper_Figures_Code
 This repository gives the full reproducible code for generating all Figures and Tables in Sparse Projected Averaged Regression to High-dimensional Data (see [Parzer, Filzmoser and Vana-Guer 2024](https://doi.org/10.48550/arXiv.2312.00130)).
+Published version: Sparse data-driven random projection in regression for high-dimensional data, [Parzer, Filzmoser and Vana-Guer 2025](https://doi.org/10.52933/jdssv.v5i5.138))
 
 This repository consists of the following folders with described contents.
 
